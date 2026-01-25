@@ -56,8 +56,8 @@ function ParallaxText({ children, baseVelocity = 100 }) {
 export default function Philosophy() {
   return (
     <section className="w-full py-40 bg-black overflow-hidden flex flex-col justify-center gap-10">
-      <ParallaxText baseVelocity={-2}>INNOVATION STRATEGY</ParallaxText>
-      <ParallaxText baseVelocity={2}>DESIGN & DEVELOPMENT</ParallaxText>
+      <ParallaxText baseVelocity={-1.5}>INNOVATION STRATEGY</ParallaxText>
+      <ParallaxText baseVelocity={1.5}>DESIGN & DEVELOPMENT</ParallaxText>
       
       {/* Central Statement */}
       <div className="w-full max-w-4xl mx-auto px-8 mt-20 text-center relative z-10">

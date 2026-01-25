@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useSpring, useMotionValue } from 'framer-motion'
 
 export default function CustomCursor() {
-  const [isHovering, setIsHovering] = useState(false)
+  const [hoverType, setHoverType] = useState(null) // null | 'pointer' | 'grab'
   
   const mouse = {
     x: useMotionValue(0),
@@ -24,10 +24,15 @@ export default function CustomCursor() {
   }
 
   const manageMouseOver = (e) => {
-    if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
-      setIsHovering(true)
+    // Check for grab targets first
+    if (e.target.closest('[data-cursor="grab"]')) {
+      setHoverType('grab')
+    } 
+    // Then check for standard pointers
+    else if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
+      setHoverType('pointer')
     } else {
-      setIsHovering(false)
+      setHoverType(null)
     }
   }
 
@@ -52,7 +57,7 @@ export default function CustomCursor() {
       {/* Main Dot */}
       <motion.div 
         animate={{
-          scale: isHovering ? 0 : 1
+          scale: hoverType ? 0 : 1
         }}
         className="w-3 h-3 bg-cyan-400 rounded-full -translate-x-1/2 -translate-y-1/2"
       />
@@ -60,9 +65,10 @@ export default function CustomCursor() {
       {/* Ring Follower */}
       <motion.div 
         animate={{
-          scale: isHovering ? 4 : 1,
-          opacity: isHovering ? 0.3 : 0.5,
-          borderColor: isHovering ? 'rgba(34, 211, 238, 0.5)' : 'rgba(255, 255, 255, 0.3)'
+          scale: hoverType === 'grab' ? 5 : (hoverType === 'pointer' ? 4 : 1),
+          opacity: hoverType ? 0.3 : 0.5,
+          borderColor: hoverType ? 'rgba(34, 211, 238, 0.5)' : 'rgba(255, 255, 255, 0.3)',
+          backgroundColor: hoverType === 'grab' ? 'rgba(34, 211, 238, 0.1)' : 'transparent'
         }}
         className="absolute top-0 left-0 w-8 h-8 -ml-4 -mt-4 border border-white rounded-full transition-colors duration-300"
       />
@@ -70,12 +76,12 @@ export default function CustomCursor() {
       {/* Label on Hover */}
       <motion.div
         animate={{
-          opacity: isHovering ? 1 : 0,
-          y: isHovering ? 20 : 0
+          opacity: hoverType ? 1 : 0,
+          y: hoverType ? 20 : 0
         }}
         className="absolute top-4 left-1/2 -translate-x-1/2 text-[10px] items-center tracking-widest uppercase text-cyan-400 font-bold whitespace-nowrap"
       >
-        Click
+        {hoverType === 'grab' ? 'DRAG' : 'CLICK'}
       </motion.div>
     </motion.div>
   )

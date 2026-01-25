@@ -3,6 +3,13 @@
 import { motion } from 'framer-motion'
 import { MapPin, Clock, Code2, Globe, Cpu, Zap } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import dynamic from 'next/dynamic'
+
+// Dynamically import Map with no SSR to avoid window is not defined errors
+const Map = dynamic(() => import('./Map'), { 
+  ssr: false,
+  loading: () => <div className="w-full h-full bg-zinc-900/50 animate-pulse" />
+})
 
 const TimeWidget = () => {
   const [time, setTime] = useState(new Date())
@@ -33,34 +40,53 @@ const TimeWidget = () => {
 
 const LocationWidget = () => (
   <div className="relative overflow-hidden h-full bg-zinc-900/40 backdrop-blur-xl border border-white/10 rounded-3xl hover:border-cyan-500/50 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(6,182,212,0.15)] group/card">
-    <div className="absolute inset-0 z-0 opacity-40 group-hover/card:opacity-60 transition-opacity bg-[url('https://api.mapbox.com/styles/v1/mapbox/dark-v11/static/31.2357,30.0444,11,0/400x400?access_token=pk.eyJ1IjoibW9oYW1tZWRtIiwiYSI6ImNrbjZ2YjZ5MzB0YjQydnF4Z2Z4Z2Z4Z2YifQ.xyz')] bg-cover bg-center grayscale group-hover/card:grayscale-0 duration-500" />
-    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
+    {/* Real Interactive Map */}
+    <div 
+      className="absolute inset-0 z-0 opacity-80 group-hover/card:opacity-100 transition-all duration-700 cursor-grab active:cursor-grabbing"
+      data-cursor="grab"
+    >
+      {/* 29°59'54.4"N 31°26'17.7"E -> 29.998444, 31.438250 */}
+      <Map center={[29.998444, 31.438250]} zoom={15} />
+    </div>
+    
+    {/* Minimal Gradient Overlay */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent z-10 pointer-events-none" />
     
     {/* Scanline Effect */}
     <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent,rgba(6,182,212,0.1),transparent)] translate-y-[-100%] group-hover/card:translate-y-[100%] transition-transform duration-[1.5s] z-20 pointer-events-none" />
 
-    <div className="relative z-20 h-full p-6 flex flex-col justify-between">
+    <div className="relative z-20 h-full p-6 flex flex-col justify-between pointer-events-none">
       <div className="flex justify-end">
-        <div className="p-2 bg-black/50 backdrop-blur-md rounded-full border border-white/10 group-hover/card:scale-110 transition-transform">
+        <div className="p-2 bg-black/50 backdrop-blur-md rounded-full border border-white/10 group-hover/card:scale-110 transition-transform shadow-lg shadow-cyan-500/10">
           <MapPin className="w-4 h-4 text-cyan-400" />
         </div>
       </div>
       <div>
-        <div className="text-2xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">Base of Ops</div>
-        <div className="text-zinc-400 text-sm">Cairo, Egypt</div>
+        <div className="text-2xl font-bold text-white font-[family-name:var(--font-space-grotesk)] drop-shadow-md">Base of Ops</div>
+        <div className="text-zinc-300 text-sm font-medium">Cairo, Egypt</div>
       </div>
     </div>
   </div>
 )
 
 const StackWidget = () => (
-  <div className="h-full p-6 bg-zinc-900/40 backdrop-blur-xl border border-white/10 rounded-3xl hover:border-cyan-500/50 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(168,85,247,0.15)] flex flex-col justify-between group/card">
-     <div className="flex justify-between items-start">
+  <div className="relative h-full p-6 bg-zinc-900/40 backdrop-blur-xl border border-white/10 rounded-3xl hover:border-cyan-500/50 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(168,85,247,0.15)] flex flex-col justify-between group/card overflow-hidden">
+     
+     {/* Background decorative code */}
+     <div className="absolute inset-0 opacity-10 pointer-events-none overflow-hidden font-mono text-[10px] leading-tight text-purple-300 select-none p-4">
+        {Array.from({ length: 10 }).map((_, i) => (
+          <div key={i} className="whitespace-nowrap opacity-50">
+            {`const stack = { id: ${i}, type: 'tech', visible: true }; // optimized`}
+          </div>
+        ))}
+     </div>
+
+     <div className="flex justify-between items-start relative z-10">
         <span className="text-zinc-400 text-xs font-mono tracking-[0.2em] group-hover/card:text-purple-400 transition-colors">CORE STACK</span>
         <Code2 className="w-5 h-5 text-zinc-500 group-hover/card:text-purple-400 transition-colors" />
       </div>
-      <div className="flex flex-wrap gap-2 content-end">
-        {['React', 'Next.js', 'TypeScript', 'Node.js', 'Tailwind', 'Three.js'].map((tech, i) => (
+      <div className="flex flex-wrap gap-2 content-end relative z-10 mt-8">
+        {['React', 'Next.js', 'TypeScript', 'Node.js', 'Tailwind', 'Three.js', 'Framer Motion', 'PostgreSQL', 'Docker', 'AWS', 'Figma', 'Git'].map((tech) => (
           <span key={tech} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs font-medium text-zinc-300 hover:bg-white/10 hover:border-purple-500/50 hover:text-white hover:shadow-[0_0_15px_-3px_rgba(168,85,247,0.4)] transition-all cursor-default relative overflow-hidden group/item">
             <span className="relative z-10">{tech}</span>
             <span className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover/item:opacity-100 transition-opacity" />
@@ -183,7 +209,7 @@ const BentoGrid = () => {
              <StatCard label="Commits" value="1.2k" icon={Code2} />
            </motion.div>
            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} viewport={{ once: true }}>
-             <StatCard label="Coffee" value="∞" icon={Cpu} />
+             <StatCard label="Milk Tea" value="∞" icon={Cpu} />
            </motion.div>
         </div>
       </div>

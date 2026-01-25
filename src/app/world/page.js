@@ -1,7 +1,18 @@
+'use client'
+
+import WorldHero from '@/components/WorldHero'
+import Footer from '@/components/Footer'
+
 export default function World() {
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center">
-      <h1 className="text-6xl font-bold font-[family-name:var(--font-space-grotesk)]">My World</h1>
-    </div>
+    <main className="w-full bg-black">
+      {/* Scroll-Driven Hero Experience */}
+      <WorldHero />
+
+      {/* Footer */}
+      <div className="relative z-50 w-full bg-black">
+        <Footer />
+      </div>
+    </main>
   )
 }

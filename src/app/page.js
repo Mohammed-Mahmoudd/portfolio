@@ -22,9 +22,9 @@ export default function Home() {
 {/* Project Gallery (Horizontal Scroll) */}
       <ProjectGallery />
       {/* Services Section */}
-      <Section id="services" background="bg-black">
+      {/* <Section id="services" background="bg-black">
         <Services />
-      </Section>
+      </Section> */}
       
       {/* Bento Grid */}
       <div className="min-h-screen flex items-center bg-black">

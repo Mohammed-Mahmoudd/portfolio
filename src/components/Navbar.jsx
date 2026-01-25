@@ -32,7 +32,7 @@ export default function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 1, type: 'spring', stiffness: 260, damping: 20 }}
-      className="fixed top-0 left-0 w-full z-50 px-8 md:px-24 py-6 flex items-center justify-between mix-blend-difference text-white"
+      className="fixed top-6 left-0 w-full z-50 px-8 md:px-24 py-6 flex items-center justify-between mix-blend-difference text-white"
     >
         {/* Logo / Brand */}
         <Link href="/" onClick={(e) => handleNavClick(e, '/')} className="text-2xl font-bold font-[family-name:var(--font-space-grotesk)] tracking-tighter">

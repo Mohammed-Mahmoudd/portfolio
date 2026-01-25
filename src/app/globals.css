@@ -4,6 +4,21 @@
   --background: #ffffff;
   --foreground: #171717;
 }
+* {
+  cursor: none !important;
+}
+
+::selection {
+  background-color: #22d3ee; /* Cyan-400 */
+  color: #000000;
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background-color: #22d3ee;
+  color: #000000;
+  text-shadow: none;
+}
 
 @theme inline {
   --color-background: var(--background);
