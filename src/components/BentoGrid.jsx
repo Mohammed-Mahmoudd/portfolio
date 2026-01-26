@@ -132,7 +132,7 @@ const StatCard = ({ label, value, icon: Icon }) => (
 
 const BentoGrid = () => {
   return (
-    <div className="relative w-full py-20 px-8 md:px-24 bg-black flex justify-center overflow-hidden">
+    <div className="relative w-full min-h-screen py-20 px-8 md:px-24 bg-black flex flex-col justify-center items-center overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.05)_1px,transparent_1px)] bg-[size:24px_24px]" />
       

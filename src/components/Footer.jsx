@@ -3,8 +3,16 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
+import { useTransition } from '@/components/TransitionCurtain'
+
 export default function Footer() {
   const currentYear = new Date().getFullYear()
+  const { navigate } = useTransition()
+
+  const handleLinkClick = (e, href) => {
+    e.preventDefault()
+    navigate(href)
+  }
 
   return (
     <footer className="relative z-50 w-full bg-black border-t border-white/10 pt-20 pb-10 px-8 md:px-24">
@@ -20,6 +28,7 @@ export default function Footer() {
             </h2>
             <Link 
               href="/contact"
+              onClick={(e) => handleLinkClick(e, '/contact')}
               className="inline-flex items-center gap-4 px-8 py-4 rounded-full bg-white text-black font-bold text-lg hover:bg-cyan-400 transition-colors duration-300"
             >
               Start a Project
@@ -37,9 +46,9 @@ export default function Footer() {
             </div>
             <div className="flex flex-col gap-4">
               <span className="text-white font-bold mb-2">Sitemap</span>
-              <Link href="/" className="hover:text-cyan-400 transition-colors">Home</Link>
-              <Link href="/work" className="hover:text-cyan-400 transition-colors">Work</Link>
-              <Link href="/contact" className="hover:text-cyan-400 transition-colors">Contact</Link>
+              <Link href="/" onClick={(e) => handleLinkClick(e, '/')} className="hover:text-cyan-400 transition-colors">Home</Link>
+              <Link href="/work" onClick={(e) => handleLinkClick(e, '/work')} className="hover:text-cyan-400 transition-colors">Work</Link>
+              <Link href="/contact" onClick={(e) => handleLinkClick(e, '/contact')} className="hover:text-cyan-400 transition-colors">Contact</Link>
             </div>
           </div>
         </div>

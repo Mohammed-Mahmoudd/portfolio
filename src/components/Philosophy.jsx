@@ -20,7 +20,7 @@ function ParallaxText({ children, baseVelocity = 100 }) {
     damping: 50,
     stiffness: 400
   })
-  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
+  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 4], {
     clamp: false
   })
 
@@ -61,11 +61,43 @@ export default function Philosophy() {
       
       {/* Central Statement */}
       <div className="w-full max-w-4xl mx-auto px-8 mt-20 text-center relative z-10">
-        <p 
-          className="text-2xl md:text-4xl text-white font-[family-name:var(--font-space-grotesk)] leading-tight"
-        >
-          Crafting digital experiences where <span className="text-cyan-400">logic meets emotion</span>. 
-          I build for the future, today.
+        {/* Visual Depth Gradient */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03),transparent_70%)] pointer-events-none blur-3xl" />
+        
+        <p className="text-2xl md:text-5xl text-white font-[family-name:var(--font-space-grotesk)] leading-tight font-medium">
+          {`Crafting digital experiences where `.split(' ').map((word, i) => (
+            <motion.span
+              key={i}
+              initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
+              className="inline-block mr-2"
+            >
+              {word}
+            </motion.span>
+          ))}
+          <motion.span
+            initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
+            whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-cyan-400 inline-block mr-2 font-bold"
+          >
+            logic meets emotion
+          </motion.span>
+          {`. I build for the future, today.`.split(' ').map((word, i) => (
+             <motion.span
+              key={`end-${i}`}
+              initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.6 + (i * 0.05) }}
+              className="inline-block mr-2"
+            >
+              {word}
+            </motion.span>
+          ))}
         </p>
       </div>
     </section>

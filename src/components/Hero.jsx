@@ -145,12 +145,10 @@ export default function Hero() {
           className="absolute bottom-12 right-12 md:right-24 z-20 flex items-center gap-4"
         >
           <span className="text-xs uppercase tracking-[0.2em] text-zinc-500 font-[family-name:var(--font-space-grotesk)]">Scroll to explore</span>
-          <motion.div
-             animate={{ y: [0, 10, 0] }}
-             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          <div
           >
             <ArrowDown className="w-5 h-5 text-zinc-400" />
-          </motion.div>
+          </div>
         </motion.div>
         
       </div>

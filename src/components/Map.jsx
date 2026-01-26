@@ -35,6 +35,11 @@ export default function Map({ center = [30.0444, 31.2357], zoom = 13 }) {
       style={{ width: '100%', height: '100%' }}
       zoomControl={false}
       attributionControl={false}
+      scrollWheelZoom={false}
+      doubleClickZoom={false}
+      touchZoom={false}
+      dragging={true}
+      keyboard={false}
     >
       {/* Dark Matter Tiles - Free, Dark, Beautiful */}
       <TileLayer
