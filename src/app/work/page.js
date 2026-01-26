@@ -1,13 +1,13 @@
 'use client'
 
 import React from 'react'
-import WorkSplit from '@/components/WorkSplit'
+import WorkAlignmentHero from '@/components/WorkAlignmentHero'
 import Footer from '@/components/Footer'
 
 export default function WorkPage() {
   return (
     <main className="w-full bg-black">
-       <WorkSplit />
+       <WorkAlignmentHero />
        
        <div className="relative z-50 w-full bg-black">
         <Footer />
