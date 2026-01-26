@@ -40,8 +40,7 @@ export default function WorldHero() {
   return (
     <div ref={containerRef} className="relative w-full h-[500vh] bg-[#09090B]">
       {/* Sticky container with Hero Frame Style */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden p-6 md:p-8 flex items-center justify-center">
-        
+      <div className="sticky top-0 h-screen w-full overflow-hidden p-5 md:p-7 flex items-center justify-center">
         {/* Inner Frame Content */}
         <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl border border-white/5 bg-black/40">
           

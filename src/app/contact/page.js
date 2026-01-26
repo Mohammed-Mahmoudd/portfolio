@@ -33,6 +33,7 @@ export default function Contact() {
             }}
             pixelDensity={1}
             pointerEvents="none"
+            
           >
             <ShaderGradient
               animate="on"
