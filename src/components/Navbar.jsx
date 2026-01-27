@@ -32,14 +32,11 @@ export default function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 1, type: 'spring', stiffness: 260, damping: 20 }}
-      className={`fixed top-4 left-4 right-4 md:top-6 md:left-0 md:w-full z-50 px-6 py-4 md:px-24 md:py-6 flex items-center justify-between transition-all duration-300 text-white rounded-2xl md:rounded-none ${
+      className={`fixed top-4 left-4 right-4 md:top-6 md:left-0 md:w-full z-[100] px-6 py-4 md:px-24 md:py-6 flex items-center justify-end transition-all duration-300 text-white rounded-2xl md:rounded-none ${
         isOpen ? 'bg-black' : 'bg-transparent'
       } md:bg-transparent md:mix-blend-difference`}
     >
-        {/* Logo / Brand */}
-        <Link href="/" onClick={(e) => handleNavClick(e, '/')} className="relative z-50 text-2xl font-[family-name:var(--font-space-grotesk)] tracking-tighter select-none">
-            MM
-        </Link>
+        {/* Logo Removed */}
 
         {/* Links */}
         <div className="hidden md:flex items-center  gap-8 md:gap-12">
@@ -75,19 +72,22 @@ export default function Navbar() {
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={{
+                open: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
+                closed: { opacity: 0, transition: { staggerChildren: 0.02, staggerDirection: -1, delay: 0.2} }
+              }}
               className="fixed top-0 left-0 w-screen h-screen z-40 bg-[#09090B] flex flex-col items-center justify-center gap-8 md:hidden"
             >
-              {navItems.map((item, i) => (
+              {navItems.map((item) => (
                 <motion.div
                   key={item.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{ delay: 0.1 + i * 0.1 }}
+                  variants={{
+                    open: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } },
+                    closed: { opacity: 0, y: 20, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }
+                  }}
                 >
                   <Link
                     href={item.href}

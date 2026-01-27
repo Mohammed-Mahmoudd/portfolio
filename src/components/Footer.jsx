@@ -15,7 +15,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative z-50 w-full bg-black border-t border-white/10 pt-20 pb-10 px-4 md:px-24">
+    <footer className="relative z-10 w-full bg-black border-t border-white/10 pt-20 pb-10 px-4 md:px-24">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-10">
           {/* CTA */}
