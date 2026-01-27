@@ -48,7 +48,7 @@ const ProjectCard = ({ project }) => {
   return (
     <Component 
       {...props}
-      className="group relative h-[500px] w-[350px] md:h-[600px] md:w-[450px] bg-zinc-900 rounded-[2rem] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-500/20 grayscale hover:grayscale-0 block flex-shrink-0"
+      className="group relative h-[60vh] min-h-[400px] w-[85vw] sm:w-[350px] md:h-[600px] md:w-[450px] bg-zinc-900 rounded-[2rem] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-500/20 grayscale hover:grayscale-0 block flex-shrink-0"
     >
       
       {/* Background Image */}
@@ -56,7 +56,7 @@ const ProjectCard = ({ project }) => {
         src={project.img} 
         alt={project.title} 
         fill
-        sizes="(max-width: 768px) 100vw, 50vw"
+        sizes="(max-width: 768px) 85vw, 450px"
         className="object-cover transition-transform duration-700 group-hover:scale-110"
       />
       
@@ -71,11 +71,11 @@ const ProjectCard = ({ project }) => {
       </div>
       
       {/* Content */}
-      <div className="absolute bottom-0 left-0 w-full p-8 z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+      <div className="absolute bottom-0 left-0 w-full p-6 md:p-8 z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
         <span className="inline-block px-3 py-1 mb-4 text-xs font-bold tracking-widest text-cyan-400 uppercase bg-cyan-950/30 border border-cyan-500/20 rounded-full backdrop-blur-sm">
             {project.category}
         </span>
-        <h3 className="text-4xl md:text-5xl font-black text-white font-[family-name:var(--font-space-grotesk)] leading-none mb-4">
+        <h3 className="text-3xl md:text-5xl font-black text-white font-[family-name:var(--font-space-grotesk)] leading-none mb-4">
              {project.title}
         </h3>
         
@@ -103,22 +103,22 @@ export default function ProjectGallery() {
       <div className="sticky top-0 h-screen flex items-center overflow-hidden">
         
         {/* Title pinned to left - Higher z-index to stay on top */}
-        <div className="absolute top-12 left-8 md:top-24 md:left-24 z-20 mix-blend-difference pointer-events-none">
-          <h2 className="text-5xl md:text-7xl font-black text-white font-[family-name:var(--font-space-grotesk)] leading-none">
+        <div className="absolute top-12 left-4 md:top-24 md:left-24 z-20 mix-blend-difference pointer-events-none">
+          <h2 className="text-4xl md:text-7xl font-black text-white font-[family-name:var(--font-space-grotesk)] leading-none">
             SELECTED <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">WORKS</span>
           </h2>
         </div>
 
         {/* Moving Track */}
-        <motion.div style={{ x }} className="flex gap-8 md:gap-16 pl-[40vw] pr-24">
+        <motion.div style={{ x }} className="flex gap-4 md:gap-16 pl-4 md:pl-[40vw] pr-24">
           {projects.map((project) => (
             <ProjectCard project={project} key={project.id} />
           ))}
         </motion.div>
         
         {/* Scroll Indicator */}
-        <div className="absolute bottom-12 left-24 text-zinc-500 font-mono text-xs tracking-widest opacity-50 animate-pulse">
+        <div className="absolute bottom-12 left-8 md:left-24 text-zinc-500 font-mono text-xs tracking-widest opacity-50 animate-pulse">
            SCROLL TO EXPLORE
         </div>
         

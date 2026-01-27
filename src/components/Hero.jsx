@@ -4,19 +4,29 @@ import { useState, useEffect } from 'react'
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowDown } from 'lucide-react'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 export default function Hero() {
+  const isMobile = useMediaQuery('(max-width: 768px)')
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    // eslint-disable-next-line
+    setMounted(true)
+  }, [])
+
+
   return (
     // Outer container with black background (the "TV frame")
-    <div className="relative w-full h-screen bg-[#09090B] flex items-center justify-center p-6 md:p-8">
+    <div className="relative w-full h-screen bg-[#09090B] flex items-center justify-center p-4 md:p-8">
       
       {/* Inner container with border (the "screen") */}
-      <div className="relative w-full h-full rounded-3xl  overflow-hidden flex items-center justify-center" style={{ isolation: 'isolate' }}>
+      <div className="relative w-full h-full rounded-3xl overflow-hidden flex items-center justify-center" style={{ isolation: 'isolate' }}>
         
         {/* 3D Background - Fixed positioning */}
         <div className="fixed inset-0 z-0" style={{ 
-          clipPath: 'inset(24px 24px 24px 24px round 24px)',
-          WebkitClipPath: 'inset(24px 24px 24px 24px round 24px)'
+          clipPath: isMobile ? 'inset(16px 16px 16px 16px round 24px)' : 'inset(24px 24px 24px 24px round 24px)',
+          WebkitClipPath: isMobile ? 'inset(16px 16px 16px 16px round 24px)' : 'inset(24px 24px 24px 24px round 24px)'
         }}>
           <ShaderGradientCanvas
             style={{
@@ -27,8 +37,8 @@ export default function Hero() {
               height: '100%',
               pointerEvents: 'none',
             }}
-            pixelDensity={0.75}
-            fov={50}
+            pixelDensity={isMobile ? 0.5 : 0.75}
+            fov={isMobile ? 30 : 50}
           >
             <ShaderGradient
               animate="on"
@@ -54,7 +64,7 @@ export default function Hero() {
               cAzimuthAngle={270}
               cPolarAngle={180}
               cDistance={0.5}
-              cameraZoom={15.1}
+              cameraZoom={isMobile ? 8 : 15.1}
               lightType="env"
               brightness={0.8}
               envPreset="city"
@@ -69,16 +79,16 @@ export default function Hero() {
         </div>
 
         {/* Content Container */}
-        <div className="relative z-10 w-full h-full flex flex-col md:flex-row items-center justify-between px-8 md:px-24 pointer-events-none select-none">
+        <div className="relative z-10 w-full h-full flex flex-col md:flex-row items-center md:justify-between justify-center px-4 md:px-24 pointer-events-none select-none gap-8 md:gap-0">
            
            {/* LEFT: Name */}
            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="flex-1 text-left"
+              className="md:flex-1 text-center md:text-left"
            >
-              <h1 className="text-6xl md:text-[8rem] leading-[0.8] font-black tracking-tighter text-white/90 font-[family-name:var(--font-space-grotesk)]">
+              <h1 className="text-5xl md:text-[8rem] leading-[0.9] md:leading-[0.8] font-black tracking-tighter text-white/90 font-[family-name:var(--font-space-grotesk)]">
                 MOHAMMED
                 <br />
                 <span className="text-zinc-500">MAHMOUD</span>
@@ -89,9 +99,8 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="flex items-center gap-6 mt-8"
+                className="flex items-center justify-center md:justify-start gap-6 mt-6 md:mt-8"
               >
-                
                 
                 {/* Social Links */}
                 <div className="flex items-center gap-4">
@@ -130,11 +139,12 @@ export default function Hero() {
            </motion.div>
 
            {/* RIGHT: Animated Titles (Cycling) */}
-           <div className="flex-1 flex justify-end mt-8 md:mt-0 h-[60px] md:h-[80px] overflow-hidden">
+           <div className={`md:flex-1 w-full md:w-auto flex ${isMobile ? 'justify-center' : 'justify-end'} mt-8 md:mt-0 h-[60px] md:h-[80px] overflow-hidden`}>
               <CyclingTitle 
                 titles={["FULL-STACK DEVELOPER", "BUILDING SCALABLE WEB APPS", "PERFORMANCE-FOCUSED ENGINEER", "INTERACTIVE WEB EXPERIENCES"]} 
               />
            </div>
+
         </div>
 
         {/* Scroll Indicator */}
@@ -142,7 +152,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.5, duration: 1 }}
-          className="absolute bottom-12 right-12 md:right-24 z-20 flex items-center gap-4"
+          className="absolute bottom-8 right-0 left-0 md:left-auto md:right-24 z-20 flex justify-center md:justify-end items-center mb-20 gap-4"
         >
           <span className="text-xs uppercase tracking-[0.2em] text-zinc-500 font-[family-name:var(--font-space-grotesk)]">Scroll to explore</span>
           <div
@@ -167,7 +177,7 @@ function CyclingTitle({ titles }) {
   }, [titles.length])
 
   return (
-    <div className="relative font-[family-name:var(--font-space-grotesk)] text-right">
+    <div className="relative font-[family-name:var(--font-space-grotesk)] text-center md:text-right w-full">
       <AnimatePresence mode="wait">
         <motion.div
           key={titles[index]}

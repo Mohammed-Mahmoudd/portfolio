@@ -7,9 +7,11 @@ import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react'
 import Link from 'next/link'
 import TransitionLink from './TransitionLink'
 import { projects } from '@/data/projectsData'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 export default function WorkAlignmentHero() {
   const [activeFilter, setActiveFilter] = useState('all') // 'all', 'web', 'mobile'
+  const isMobile = useMediaQuery('(max-width: 768px)')
   
   const filteredProjects = activeFilter === 'all' 
     ? projects 
@@ -28,8 +30,9 @@ export default function WorkAlignmentHero() {
                 width: '100%',
                 height: '100%',
               }}
-              pixelDensity={1}
+              pixelDensity={isMobile ? 0.6 : 1}
               pointerEvents="none"
+              
             >
               <ShaderGradient
                 animate="on"
@@ -55,7 +58,7 @@ export default function WorkAlignmentHero() {
                 cAzimuthAngle={212}
                 cPolarAngle={180}
                 cDistance={0.5}
-                cameraZoom={15.1}
+                cameraZoom={isMobile ? 12 : 15.1}
                 lightType="env"
                 brightness={0.8}
                 envPreset="city"
@@ -81,7 +84,7 @@ export default function WorkAlignmentHero() {
               transition={{ duration: 0.8 }}
               className="mb-12 md:mb-16"
             >
-              <h1 className="text-[12vw] md:text-[8vw] leading-[0.8] font-black tracking-tighter text-white font-[family-name:var(--font-space-grotesk)] mb-6">
+              <h1 className="text-[12vw] md:text-[8vw] leading-[0.8] font-black tracking-tighter text-white font-[family-name:var(--font-space-grotesk)] mt-2 mb-6">
                 MY WORK
               </h1>
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">

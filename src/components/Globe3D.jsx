@@ -6,6 +6,8 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { Stars } from '@react-three/drei'
 import * as THREE from 'three'
 
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+
 // Space particles component
 function SpaceParticles() {
   const particlesRef = useRef()
@@ -73,6 +75,8 @@ export function WorldBackground() {
 }
 
 export default function Globe3D() {
+  const isMobile = useMediaQuery('(max-width: 768px)')
+
   return (
     <div className="w-full h-full relative">      
       {/* ShaderGradient Sphere Layer */}
@@ -83,8 +87,8 @@ export default function Globe3D() {
             height: '100%',
             background: 'transparent',
           }}
-          fov={107}
-          pixelDensity={1}
+          fov={isMobile ? 94 : 107}
+          pixelDensity={isMobile ? 0.6 : 1}
           pointerEvents="none"
         >
           <ShaderGradient
@@ -93,7 +97,7 @@ export default function Globe3D() {
             wireframe={false}
             shader="defaults"
             uTime={0}
-            uSpeed={0.3}
+            uSpeed={0.25}
             uStrength={0.1}
             uDensity={0.8}
             uFrequency={1.5}
@@ -111,7 +115,7 @@ export default function Globe3D() {
             cAzimuthAngle={270}
             cPolarAngle={180}
             cDistance={0.5}
-            cameraZoom={15.1}
+            cameraZoom={isMobile ? 7 : 15.1}
             lightType="env"
             brightness={0.8}
             envPreset="city"
@@ -126,3 +130,4 @@ export default function Globe3D() {
     </div>
   )
 }
+

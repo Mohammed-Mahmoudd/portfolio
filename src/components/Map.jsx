@@ -16,7 +16,7 @@ const icon = L.icon({
   shadowSize: [41, 41]
 });
 
-export default function Map({ center = [30.0444, 31.2357], zoom = 13 }) {
+export default function Map({ center = [30.0444, 31.2357], zoom = 13, dragging = true }) {
   // Fix hydration mismatch by only rendering on client
   const [mounted, setMounted] = useState(false)
 
@@ -38,7 +38,7 @@ export default function Map({ center = [30.0444, 31.2357], zoom = 13 }) {
       scrollWheelZoom={false}
       doubleClickZoom={false}
       touchZoom={false}
-      dragging={true}
+      dragging={dragging}
       keyboard={false}
     >
       {/* Dark Matter Tiles - Free, Dark, Beautiful */}

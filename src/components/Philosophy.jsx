@@ -43,7 +43,7 @@ function ParallaxText({ children, baseVelocity = 100 }) {
 
   return (
     <div className="overflow-hidden m-0 whitespace-nowrap flex flex-nowrap">
-      <motion.div className="font-black uppercase text-[12rem] md:text-[16rem] leading-[0.85] tracking-tighter whitespace-nowrap flex flex-nowrap" style={{ x }}>
+      <motion.div className="font-black uppercase text-[6rem] md:text-[12rem] lg:text-[16rem] leading-[0.85] tracking-tighter whitespace-nowrap flex flex-nowrap" style={{ x }}>
         <span className="block mr-12 text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-zinc-800">{children} </span>
         <span className="block mr-12 text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-zinc-800">{children} </span>
         <span className="block mr-12 text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-zinc-800">{children} </span>
@@ -55,16 +55,16 @@ function ParallaxText({ children, baseVelocity = 100 }) {
 
 export default function Philosophy() {
   return (
-    <section className="w-full py-40 bg-black overflow-hidden flex flex-col justify-center gap-10">
+    <section className="w-full py-20 md:py-40 bg-black overflow-hidden flex flex-col justify-center gap-10">
       <ParallaxText baseVelocity={-1.5}>INNOVATION STRATEGY</ParallaxText>
       <ParallaxText baseVelocity={1.5}>DESIGN & DEVELOPMENT</ParallaxText>
       
       {/* Central Statement */}
-      <div className="w-full max-w-4xl mx-auto px-8 mt-20 text-center relative z-10">
+      <div className="w-full max-w-4xl mx-auto px-4 md:px-8 mt-12 md:mt-20 text-center relative z-10">
         {/* Visual Depth Gradient */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03),transparent_70%)] pointer-events-none blur-3xl" />
         
-        <p className="text-2xl md:text-5xl text-white font-[family-name:var(--font-space-grotesk)] leading-tight font-medium">
+        <p className="text-xl md:text-4xl lg:text-5xl text-white font-[family-name:var(--font-space-grotesk)] leading-tight font-medium">
           {`Crafting digital experiences where `.split(' ').map((word, i) => (
             <motion.span
               key={i}
@@ -103,3 +103,4 @@ export default function Philosophy() {
     </section>
   )
 }
+

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { MapPin, Clock, Code2, Globe, Cpu, Zap } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 // Dynamically import Map with no SSR to avoid window is not defined errors
 const Map = dynamic(() => import('./Map'), { 
@@ -38,7 +39,7 @@ const TimeWidget = () => {
   )
 }
 
-const LocationWidget = () => (
+const LocationWidget = ({ dragging = true }) => (
   <div className="relative overflow-hidden h-full bg-zinc-900/40 backdrop-blur-xl border border-white/10 rounded-3xl hover:border-cyan-500/50 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(6,182,212,0.15)] group/card">
     {/* Real Interactive Map */}
     <div 
@@ -46,7 +47,7 @@ const LocationWidget = () => (
       data-cursor="grab"
     >
       {/* 29°59'54.4"N 31°26'17.7"E -> 29.998444, 31.438250 */}
-      <Map center={[29.998444, 31.438250]} zoom={15} />
+      <Map center={[29.998444, 31.438250]} zoom={15} dragging={dragging} />
     </div>
     
     {/* Minimal Gradient Overlay */}
@@ -131,8 +132,10 @@ const StatCard = ({ label, value, icon: Icon }) => (
 )
 
 const BentoGrid = () => {
+  const isMobile = useMediaQuery('(max-width: 768px)')
+
   return (
-    <div className="relative w-full min-h-screen py-20 px-8 md:px-24 bg-black flex flex-col justify-center items-center overflow-hidden">
+    <div className="relative w-full min-h-screen py-20 px-4 md:px-24 bg-black flex flex-col justify-center items-center overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.05)_1px,transparent_1px)] bg-[size:24px_24px]" />
       
@@ -157,10 +160,11 @@ const BentoGrid = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
-            className="md:col-span-2 md:row-span-2"
+            className="md:col-span-2 md:row-span-2 h-[250px] md:h-full"
           >
-            <LocationWidget />
+            <LocationWidget dragging={!isMobile} />
           </motion.div>
+
 
           {/* Time - Wide */}
           <motion.div 
@@ -168,7 +172,7 @@ const BentoGrid = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="md:col-span-1 md:row-span-1"
+            className="md:col-span-1 md:row-span-1 h-[200px] md:h-full"
           >
             <TimeWidget />
           </motion.div>
@@ -179,7 +183,7 @@ const BentoGrid = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
-            className="md:col-span-1 md:row-span-2"
+            className="md:col-span-1 md:row-span-2 min-h-[300px] md:h-full md:min-h-0"
           >
             <StackWidget />
           </motion.div>
@@ -190,23 +194,24 @@ const BentoGrid = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
-            className="md:col-span-1 md:row-span-1"
+            className="md:col-span-1 md:row-span-1 h-[200px] md:h-full"
           >
             <StatusWidget />
           </motion.div>
 
         </div>
+
         
         {/* Bottom Stats Row */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} viewport={{ once: true }}>
-             <StatCard label="Years Exp." value="3+" icon={Zap} />
+             <StatCard label="Years Exp." value="1+" icon={Zap} />
            </motion.div>
            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} viewport={{ once: true }}>
-             <StatCard label="Projects" value="20+" icon={Globe} />
+             <StatCard label="Projects" value="10+" icon={Globe} />
            </motion.div>
            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }} viewport={{ once: true }}>
-             <StatCard label="Commits" value="1.2k" icon={Code2} />
+             <StatCard label="Commits" value="100 +" icon={Code2} />
            </motion.div>
            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} viewport={{ once: true }}>
              <StatCard label="Milk Tea" value="∞" icon={Cpu} />
