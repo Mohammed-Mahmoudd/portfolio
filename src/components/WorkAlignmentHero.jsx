@@ -1,286 +1,242 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowUpRight, Monitor, Smartphone, Code, Layers } from 'lucide-react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowUpRight, Monitor, Smartphone, Grid3x3 } from 'lucide-react'
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react'
-
-// --- DATA ---
-const projects = [
-  { 
-    id: 1, 
-    title: "Tchaikovsky Ops", 
-    year: "2024", 
-    category: "Education Platform",
-    type: "web",
-    description: "Comprehensive learning management system with real-time analytics",
-    tech: ["React", "Node.js", "PostgreSQL"]
-  },
-  { 
-    id: 2, 
-    title: "Elmetr Ecosystem", 
-    year: "2023", 
-    category: "Legal Tech",
-    type: "web",
-    description: "End-to-end legal document management and workflow automation",
-    tech: ["Next.js", "TypeScript", "MongoDB"]
-  },
-  { 
-    id: 3, 
-    title: "Alserag Portal", 
-    year: "2023", 
-    category: "Enterprise",
-    type: "web",
-    description: "Scalable enterprise resource planning solution",
-    tech: ["React", "Express", "MySQL"]
-  },
-  { 
-    id: 4, 
-    title: "Tchaikovsky App", 
-    year: "2024", 
-    category: "Education",
-    type: "mobile",
-    description: "Native mobile learning experience for iOS and Android",
-    tech: ["React Native", "Firebase", "Redux"]
-  },
-  { 
-    id: 5, 
-    title: "Elmetr Connect", 
-    year: "2023", 
-    category: "Legal Tech",
-    type: "mobile",
-    description: "Mobile-first legal consultation and case tracking",
-    tech: ["Flutter", "Node.js", "MongoDB"]
-  },
-  { 
-    id: 6, 
-    title: "Focus Flow", 
-    year: "2022", 
-    category: "Productivity",
-    type: "mobile",
-    description: "Pomodoro-based productivity tracker with analytics",
-    tech: ["React Native", "SQLite", "Context API"]
-  },
-]
+import Link from 'next/link'
+import TransitionLink from './TransitionLink'
+import { projects } from '@/data/projectsData'
 
 export default function WorkAlignmentHero() {
-  const containerRef = useRef(null)
+  const [activeFilter, setActiveFilter] = useState('all') // 'all', 'web', 'mobile'
   
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  })
-
-  // Opacity transforms for different sections
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0])
-  const webIntroOpacity = useTransform(scrollYProgress, [0.08, 0.15, 0.25, 0.32], [0, 1, 1, 0])
-  const webProject1Opacity = useTransform(scrollYProgress, [0.28, 0.35, 0.42, 0.48], [0, 1, 1, 0])
-  const webProject2Opacity = useTransform(scrollYProgress, [0.44, 0.50, 0.57, 0.63], [0, 1, 1, 0])
-  const mobileIntroOpacity = useTransform(scrollYProgress, [0.60, 0.67, 0.74, 0.80], [0, 1, 1, 0])
-  const mobileProjectsOpacity = useTransform(scrollYProgress, [0.77, 0.83, 0.92, 0.98], [0, 1, 1, 0])
+  const filteredProjects = activeFilter === 'all' 
+    ? projects 
+    : projects.filter(p => p.type === activeFilter)
 
   return (
-    <div ref={containerRef} className="relative w-full h-[600vh] bg-[#09090B]">
-      {/* Sticky container with frame */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden p-6 md:p-8 flex items-center justify-center">
-        {/* Inner Frame */}
-        <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl border border-white/5 bg-black/40" style={{ isolation: 'isolate' }}>
-          
-          {/* Shader Background */}
-          <div className="absolute inset-0 z-0 pointer-events-none">
-            <div className="absolute inset-0">
-              <ShaderGradientCanvas
-                style={{
-                  width: '100%',
-                  height: '100%',
-                }}
-                pixelDensity={1}
-                pointerEvents="none"
-              >
-                <ShaderGradient
-                  animate="on"
-                  type="sphere"
-                  wireframe={false}
-                  shader="defaults"
-                  uTime={0}
-                  uSpeed={0.3}
-                  uStrength={0.3}
-                  uDensity={0.8}
-                  uFrequency={5.5}
-                  uAmplitude={3.2}
-                  positionX={-0.1}
-                  positionY={0}
-                  positionZ={0}
-                  rotationX={0}
-                  rotationY={130}
-                  rotationZ={70}
-                  color1="#2f5153"
-                  color2="#053964"
-                  color3="#384154"
-                  reflection={0.4}
-                  cAzimuthAngle={212}
-                  cPolarAngle={180}
-                  cDistance={0.5}
-                  cameraZoom={15.1}
-                  lightType="env"
-                  brightness={0.8}
-                  envPreset="city"
-                  grain="on"
-                  toggleAxis={false}
-                  zoomOut={false}
-                  hoverState=""
-                  enableTransition={false}
-                />
-              </ShaderGradientCanvas>
-            </div>
-            <div className="absolute inset-0 bg-black/40" />
+    <div className="relative w-full min-h-screen bg-[#09090B] flex items-center justify-center p-6 md:p-8">
+      {/* Inner Frame */}
+      <div className="relative w-full h-full min-h-[calc(100vh-3rem)] md:min-h-[calc(100vh-4rem)] rounded-3xl overflow-hidden shadow-2xl border border-white/5 bg-black/40" style={{ isolation: 'isolate' }}>
+        
+        {/* Shader Background */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute inset-0">
+            <ShaderGradientCanvas
+              style={{
+                width: '100%',
+                height: '100%',
+              }}
+              pixelDensity={1}
+              pointerEvents="none"
+            >
+              <ShaderGradient
+                animate="on"
+                type="sphere"
+                wireframe={false}
+                shader="defaults"
+                uTime={0}
+                uSpeed={0.3}
+                uStrength={0.3}
+                uDensity={0.8}
+                uFrequency={5.5}
+                uAmplitude={3.2}
+                positionX={-0.1}
+                positionY={0}
+                positionZ={0}
+                rotationX={0}
+                rotationY={130}
+                rotationZ={70}
+                color1="#2f5153"
+                color2="#053964"
+                color3="#384154"
+                reflection={0.4}
+                cAzimuthAngle={212}
+                cPolarAngle={180}
+                cDistance={0.5}
+                cameraZoom={15.1}
+                lightType="env"
+                brightness={0.8}
+                envPreset="city"
+                grain="on"
+                toggleAxis={false}
+                zoomOut={false}
+                hoverState=""
+                enableTransition={false}
+              />
+            </ShaderGradientCanvas>
           </div>
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
 
-          {/* Stage 1: Hero Title */}
-          <motion.div 
-            style={{ opacity: heroOpacity }}
-            className="absolute inset-0 flex items-center justify-center z-10 px-8 pointer-events-none"
-          >
-            <div className="text-center relative z-20">
-              <h1 className="text-[14vw] md:text-[12vw] leading-[0.8] font-black tracking-tighter text-white font-[family-name:var(--font-space-grotesk)]">
+        {/* Content Container - Scrollable */}
+        <div className="relative z-10 w-full h-full overflow-y-auto">
+          <div className="max-w-7xl mx-auto px-8 md:px-16 py-12 md:py-20">
+            
+            {/* Header */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="mb-12 md:mb-16"
+            >
+              <h1 className="text-[12vw] md:text-[8vw] leading-[0.8] font-black tracking-tighter text-white font-[family-name:var(--font-space-grotesk)] mb-6">
                 MY WORK
               </h1>
-              <div className="mt-8 flex justify-between items-end w-full px-2 gap-8">
-                <span className="text-sm font-mono tracking-widest text-zinc-400">SELECTED PROJECTS</span>
-                <p className="text-xl text-zinc-300 font-light tracking-[0.2em] uppercase">2022-2024</p>
-                <span className="text-sm font-mono tracking-widest text-zinc-400">SCROLL</span>
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <p className="text-xl md:text-2xl text-zinc-300 font-light max-w-2xl">
+                  Selected projects showcasing web and mobile development expertise
+                </p>
+                
+                {/* Filter Tabs */}
+                <div className="flex items-center gap-2 bg-black/40 backdrop-blur-sm border border-white/10 rounded-full p-1.5">
+                  <button
+                    onClick={() => setActiveFilter('all')}
+                    className={`px-6 py-2 rounded-full text-sm font-mono transition-all duration-300 ${
+                      activeFilter === 'all' 
+                        ? 'bg-white text-black' 
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    ALL
+                  </button>
+                  <button
+                    onClick={() => setActiveFilter('web')}
+                    className={`px-6 py-2 rounded-full text-sm font-mono transition-all duration-300 flex items-center gap-2 ${
+                      activeFilter === 'web' 
+                        ? 'bg-cyan-400 text-black' 
+                        : 'text-zinc-400 hover:text-cyan-400'
+                    }`}
+                  >
+                    <Monitor className="w-4 h-4" />
+                    WEB
+                  </button>
+                  <button
+                    onClick={() => setActiveFilter('mobile')}
+                    className={`px-6 py-2 rounded-full text-sm font-mono transition-all duration-300 flex items-center gap-2 ${
+                      activeFilter === 'mobile' 
+                        ? 'bg-white text-black' 
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    <Smartphone className="w-4 h-4" />
+                    MOBILE
+                  </button>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
 
-          {/* Stage 2: Web Development Intro */}
-          <motion.div 
-            style={{ opacity: webIntroOpacity }}
-            className="absolute inset-0 flex items-center justify-start z-10 px-8 md:px-24 pointer-events-none"
-          >
-            <div className="max-w-2xl pr-12 border-r-2 border-cyan-400/30 text-right">
-              <Monitor className="w-16 h-16 text-cyan-400 mb-6 ml-auto" />
-              <h2 className="text-7xl md:text-8xl font-black text-white font-[family-name:var(--font-space-grotesk)] mb-6 leading-[0.85]">
-                WEB<br/><span className="text-cyan-400">DEV</span>
-              </h2>
-              <p className="text-2xl text-zinc-300 leading-relaxed font-light">
-                Building scalable, performant web applications with modern frameworks and best practices.
-              </p>
-              <div className="mt-8 flex items-center gap-4 justify-end">
-                <div className="h-[1px] w-24 bg-cyan-400/50" />
-                <span className="text-sm font-mono text-cyan-400">03 PROJECTS</span>
+            {/* Projects Grid */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeFilter}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+              >
+                {filteredProjects.map((project, index) => (
+                  <motion.div
+                    key={project.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    <ProjectCard project={project} />
+                  </motion.div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Footer Stats */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+              className="mt-16 md:mt-24 pt-8 border-t border-white/10"
+            >
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                  <div className="text-4xl md:text-5xl font-black text-white font-[family-name:var(--font-space-grotesk)]">10</div>
+                  <div className="text-sm text-zinc-500 font-mono mt-2">TOTAL PROJECTS</div>
+                </div>
+                <div>
+                  <div className="text-4xl md:text-5xl font-black text-cyan-400 font-[family-name:var(--font-space-grotesk)]">06</div>
+                  <div className="text-sm text-zinc-500 font-mono mt-2">WEB APPS</div>
+                </div>
+                <div>
+                  <div className="text-4xl md:text-5xl font-black text-white font-[family-name:var(--font-space-grotesk)]">04</div>
+                  <div className="text-sm text-zinc-500 font-mono mt-2">MOBILE APPS</div>
+                </div>
+                <div>
+                  <div className="text-4xl md:text-5xl font-black text-white font-[family-name:var(--font-space-grotesk)]">1+</div>
+                  <div className="text-sm text-zinc-500 font-mono mt-2">YEARS EXPERIENCE</div>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
 
-          {/* Stage 3: Web Project 1 */}
-          <motion.div 
-            style={{ opacity: webProject1Opacity }}
-            className="absolute inset-0 flex items-center justify-center z-10 px-8 md:px-16 pointer-events-none"
-          >
-            <ProjectCard project={projects[0]} accent="cyan" />
-          </motion.div>
-
-          {/* Stage 4: Web Project 2 & 3 */}
-          <motion.div 
-            style={{ opacity: webProject2Opacity }}
-            className="absolute inset-0 flex items-center justify-center z-10 px-8 md:px-12 pointer-events-none"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
-              <ProjectCard project={projects[1]} accent="cyan" compact />
-              <ProjectCard project={projects[2]} accent="cyan" compact />
-            </div>
-          </motion.div>
-
-          {/* Stage 5: Mobile Development Intro */}
-          <motion.div 
-            style={{ opacity: mobileIntroOpacity }}
-            className="absolute inset-0 flex items-center justify-end z-10 px-8 md:px-24 pointer-events-none"
-          >
-            <div className="max-w-2xl pl-12 border-l-2 border-white/30">
-              <Smartphone className="w-16 h-16 text-white mb-6" />
-              <h2 className="text-7xl md:text-8xl font-black text-white font-[family-name:var(--font-space-grotesk)] mb-6 leading-[0.85]">
-                MOBILE<br/><span className="text-zinc-500">APPS</span>
-              </h2>
-              <p className="text-2xl text-zinc-300 leading-relaxed font-light">
-                Native and cross-platform mobile experiences that users love.
-              </p>
-              <div className="mt-8 flex items-center gap-4">
-                <span className="text-sm font-mono text-white">03 PROJECTS</span>
-                <div className="h-[1px] w-24 bg-white/50" />
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Stage 6: Mobile Projects Grid */}
-          <motion.div 
-            style={{ opacity: mobileProjectsOpacity }}
-            className="absolute inset-0 flex items-center justify-center z-10 px-8 md:px-12 pointer-events-none"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-7xl">
-              {projects.slice(3).map((project) => (
-                <ProjectCard key={project.id} project={project} accent="white" compact />
-              ))}
-            </div>
-          </motion.div>
-
+          </div>
         </div>
+
       </div>
     </div>
   )
 }
 
 // Project Card Component
-function ProjectCard({ project, accent = "cyan", compact = false }) {
-  const accentColor = accent === "cyan" ? "cyan-400" : "white"
-  const borderColor = accent === "cyan" ? "border-cyan-400/20" : "border-white/20"
+function ProjectCard({ project }) {
+  const isWeb = project.type === 'web'
+  const accentColor = isWeb ? 'cyan-400' : 'white'
+  const borderColor = isWeb ? 'border-cyan-400/20' : 'border-white/20'
   
   return (
-    <div className={`relative bg-black/60 backdrop-blur-md border ${borderColor} rounded-2xl p-8 ${compact ? 'md:p-6' : 'md:p-12'} group hover:bg-black/80 transition-all duration-500`}>
-      {/* Number Badge */}
-      <div className="absolute -top-4 -right-4 w-12 h-12 bg-black border border-white/20 rounded-full flex items-center justify-center">
-        <span className={`text-sm font-mono font-bold text-${accentColor}`}>{String(project.id).padStart(2, '0')}</span>
+    <TransitionLink href={`/work/${project.id}`} className="block h-full">
+      <div className={`relative bg-black/60 backdrop-blur-md border ${borderColor} rounded-2xl p-6 group hover:bg-black/80 hover:border-${accentColor}/40 transition-all duration-500 h-full flex flex-col cursor-pointer`}>
+      {/* Header */}
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex-1">
+          <span className={`text-xs font-mono tracking-widest text-${accentColor} uppercase`}>
+            {project.category}
+          </span>
+          <h3 className="text-2xl md:text-3xl font-bold text-white mt-2 font-[family-name:var(--font-space-grotesk)] leading-tight group-hover:text-white/90 transition-colors">
+            {project.title}
+          </h3>
+        </div>
+        <div className="flex flex-col items-end gap-2">
+          <span className="text-sm font-mono text-zinc-500">{project.year}</span>
+          {isWeb ? (
+            <Monitor className="w-5 h-5 text-cyan-400" />
+          ) : (
+            <Smartphone className="w-5 h-5 text-white" />
+          )}
+        </div>
       </div>
       
-      {/* Content */}
-      <div className="relative z-10">
-        <div className="flex items-start justify-between mb-4">
-          <div>
-            <span className={`text-xs font-mono tracking-widest text-${accentColor} uppercase`}>{project.category}</span>
-            <h3 className={`${compact ? 'text-2xl md:text-3xl' : 'text-4xl md:text-5xl'} font-bold text-white mt-2 font-[family-name:var(--font-space-grotesk)] leading-tight`}>
-              {project.title}
-            </h3>
-          </div>
-          <span className="text-sm font-mono text-zinc-500">{project.year}</span>
-        </div>
-        
-        {!compact && (
-          <p className="text-lg text-zinc-300 mb-6 leading-relaxed">
-            {project.description}
-          </p>
-        )}
-        
-        {/* Tech Stack */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {project.tech.map((tech, i) => (
-            <span key={i} className="px-3 py-1 text-xs font-mono bg-white/5 border border-white/10 rounded-full text-zinc-400">
-              {tech}
-            </span>
-          ))}
-        </div>
-        
-        {/* View Project Link */}
-        <a 
-          href="#" 
-          className={`inline-flex items-center gap-2 text-sm font-mono text-${accentColor} group-hover:gap-4 transition-all duration-300 pointer-events-auto`}
-        >
-          VIEW PROJECT
-          <ArrowUpRight className="w-4 h-4" />
-        </a>
+      {/* Description */}
+      <p className="text-sm text-zinc-400 mb-4 leading-relaxed flex-1">
+        {project.description}
+      </p>
+      
+      {/* Tech Stack */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        {project.tech.map((tech, i) => (
+          <span key={i} className="px-2.5 py-1 text-xs font-mono bg-white/5 border border-white/10 rounded-full text-zinc-400">
+            {tech}
+          </span>
+        ))}
+      </div>
+      
+      {/* View Project Link */}
+      <div className={`inline-flex items-center gap-2 text-sm font-mono text-${accentColor} group-hover:gap-4 transition-all duration-300 mt-auto`}>
+        VIEW PROJECT
+        <ArrowUpRight className="w-4 h-4" />
       </div>
       
       {/* Decorative Corner */}
-      <div className={`absolute bottom-0 right-0 w-24 h-24 border-r border-b ${borderColor} rounded-br-2xl opacity-20`} />
-    </div>
+      <div className={`absolute bottom-0 right-0 w-16 h-16 border-r border-b ${borderColor} rounded-br-2xl opacity-20 group-hover:opacity-40 transition-opacity`} />
+      </div>
+    </TransitionLink>
   )
 }

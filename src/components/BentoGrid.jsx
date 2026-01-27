@@ -86,7 +86,7 @@ const StackWidget = () => (
         <Code2 className="w-5 h-5 text-zinc-500 group-hover/card:text-purple-400 transition-colors" />
       </div>
       <div className="flex flex-wrap gap-2 content-end relative z-10 mt-8">
-        {['React', 'Next.js', 'TypeScript', 'Node.js', 'Tailwind', 'Three.js', 'Framer Motion', 'PostgreSQL', 'Docker', 'AWS', 'Figma', 'Git'].map((tech) => (
+        {['React', 'Next.js', 'TypeScript', 'Node.js', 'Tailwind', 'Three.js', 'laravel', 'PHP', 'javascript', 'bootstrap', 'Framer Motion', 'PostgreSQL', 'Docker', 'AWS', 'Figma', 'Git'].map((tech) => (
           <span key={tech} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs font-medium text-zinc-300 hover:bg-white/10 hover:border-purple-500/50 hover:text-white hover:shadow-[0_0_15px_-3px_rgba(168,85,247,0.4)] transition-all cursor-default relative overflow-hidden group/item">
             <span className="relative z-10">{tech}</span>
             <span className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover/item:opacity-100 transition-opacity" />

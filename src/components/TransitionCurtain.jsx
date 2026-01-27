@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { usePathname, useRouter } from 'next/navigation'
-import { useState, useEffect, createContext, useContext, useRef, useCallback } from 'react'
+import { useState, useEffect, createContext, useContext, useCallback, useRef } from 'react'
 
 const TransitionContext = createContext(null)
 
@@ -10,42 +10,39 @@ export function TransitionProvider({ children }) {
   const router = useRouter()
   const pathname = usePathname()
   const [isTransitioning, setIsTransitioning] = useState(true)
-  const [isPageLoaded, setIsPageLoaded] = useState(false)
   const [isFirstLoad, setIsFirstLoad] = useState(true)
+  const [isPageLoaded, setIsPageLoaded] = useState(false)
 
   const navigate = (href) => {
     if (href === pathname) return
     setIsTransitioning(true)
     setIsPageLoaded(false)
-    // Wait for curtain to cover screen (1.2s), then push route
+    
+    // Wait for curtain to slide up (0.6s), then push route
     setTimeout(() => {
       router.push(href)
-    }, 1200) 
+    }, 600) 
   }
 
-  // When pathname changes, it means data is loaded/route is ready
+  // When pathname changes, mark page as loaded
   useEffect(() => {
-    if (isTransitioning) {
-       // Extended delay (2s) to allow heavy backgrounds/3D elements to initialize/render
-       const t = setTimeout(() => setIsPageLoaded(true), 2000)
-       return () => clearTimeout(t)
-    }
-  }, [pathname, isTransitioning]) 
+     const t = setTimeout(() => setIsPageLoaded(true), 10)
+     return () => clearTimeout(t)
+  }, [pathname])
 
-  const handleTransitionComplete = useCallback(() => {
+  const handleLoadingComplete = useCallback(() => {
     setIsTransitioning(false)
-    setIsPageLoaded(false)
     setIsFirstLoad(false)
-  }, [])
+  }, []) 
 
   return (
     <TransitionContext.Provider value={{ navigate, isTransitioning }}>
       {children}
-      <TransitionCurtain 
+      <SlideCurtain 
         isActive={isTransitioning} 
-        isPageLoaded={isPageLoaded}
-        onComplete={handleTransitionComplete}
         isFirstLoad={isFirstLoad}
+        isPageLoaded={isPageLoaded}
+        onComplete={handleLoadingComplete}
       />
     </TransitionContext.Provider>
   )
@@ -55,27 +52,22 @@ export function useTransition() {
   return useContext(TransitionContext)
 }
 
-function TransitionCurtain({ isActive, isPageLoaded, onComplete, isFirstLoad }) {
-  // Removed scroll lock effect as per user request
-  
-  // Handle hold time before closing
-  useEffect(() => {
-      // Once we are active, and page is loaded, and counter finished...
-      // Actually, LoadingCounter will call onComplete when it hits 100%
-  }, [isPageLoaded])
-
+function SlideCurtain({ isActive, isFirstLoad, isPageLoaded, onComplete }) {
   return (
     <AnimatePresence mode='wait'>
       {isActive && (
         <motion.div
-          key="curtain"
+          key="slide-curtain"
           initial={{ y: isFirstLoad ? '0%' : '100%' }}
           animate={{ y: '0%' }}
           exit={{ y: '-100%' }}
-          transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
-          className="fixed inset-0 z-[9999] bg-[#0a0a0a] flex items-center justify-center pointer-events-auto"
+          transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+          className="fixed inset-0 z-[9999] bg-[#0a0a0a] pointer-events-auto flex items-center justify-center"
         >
-           <LoadingCounter isPageLoaded={isPageLoaded} onComplete={onComplete} />
+             <LoadingCounter 
+                isPageLoaded={isPageLoaded} 
+                onComplete={onComplete} 
+             />
         </motion.div>
       )}
     </AnimatePresence>
@@ -103,9 +95,11 @@ function LoadingCounter({ isPageLoaded, onComplete }) {
               return 
           }
 
-          currentProgress += 1
+          // Move faster if loaded (catch up)
+          const increment = loaded ? 5 : 1
+          currentProgress += increment
           
-          if (currentProgress > 100) {
+          if (currentProgress >= 100) {
             clearInterval(interval)
             currentProgress = 100
             // Wait a tiny bit at 100 before closing
@@ -115,7 +109,7 @@ function LoadingCounter({ isPageLoaded, onComplete }) {
           }
           
           setProgress(currentProgress)
-      }, 10) // 10ms speed
+      }, 20) // 20ms speed for smoother animation
 
       // Cleanup function for the interval
       return () => clearInterval(interval)
@@ -125,7 +119,7 @@ function LoadingCounter({ isPageLoaded, onComplete }) {
   }, [onComplete]) // Run once on mount (onComplete is stable via useCallback)
 
   return (
-    <div className="fixed bottom-12 right-12 z-50 overflow-hidden mix-blend-difference">
+    <div className="fixed bottom-12 right-12 z-50 mix-blend-difference pointer-events-none">
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}

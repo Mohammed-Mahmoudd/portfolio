@@ -3,6 +3,7 @@
 import { motion, useTransform, useScroll } from 'framer-motion'
 import { useRef } from 'react'
 import { ArrowUpRight } from 'lucide-react'
+import Image from 'next/image'
 
 const projects = [
   {
@@ -25,12 +26,6 @@ const projects = [
     id: 3,
     img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop",
     url: "https://el-serag.com"
-  },
-  {
-    title: "Tchaikovsky App",
-    category: "Mobile Application",
-    id: 4,
-    img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2670&auto=format&fit=crop"
   },
   {
     title: "Elmetr App",
@@ -57,10 +52,12 @@ const ProjectCard = ({ project }) => {
     >
       
       {/* Background Image */}
-      <img 
+      <Image 
         src={project.img} 
         alt={project.title} 
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        fill
+        sizes="(max-width: 768px) 100vw, 50vw"
+        className="object-cover transition-transform duration-700 group-hover:scale-110"
       />
       
       {/* Dark Gradient Overlay */}

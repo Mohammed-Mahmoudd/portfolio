@@ -4,58 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react'
 import { ArrowUpRight, Smartphone, Monitor } from 'lucide-react'
-
-// --- DATA ---
-const webProjects = [
-  {
-    id: 1,
-    title: "Tchaikovsky Ops",
-    category: "Music Education Platform",
-    img: "https://images.unsplash.com/photo-1552422535-c45813c61732?q=80&w=2072&auto=format&fit=crop",
-    url: "https://tchaikovskyschool.com",
-    year: "2024"
-  },
-  {
-    id: 2,
-    title: "Elmetr Ecosystem",
-    category: "Legal Tech Platform",
-    img: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=2542&auto=format&fit=crop",
-    url: "https://elmetr.com",
-    year: "2023"
-  },
-  {
-    id: 3,
-    title: "Alserag Portal",
-    category: "Corporate Enterprise",
-    img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop",
-    url: "https://el-serag.com",
-    year: "2023"
-  }
-]
-
-const mobileProjects = [
-  {
-    id: 4,
-    title: "Tchaikovsky Mobile",
-    category: "iOS / Android App",
-    img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2670&auto=format&fit=crop",
-    downloads: "10k+"
-  },
-  {
-    id: 5,
-    title: "Elmetr Connect",
-    category: "Legal Client App",
-    img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2670&auto=format&fit=crop",
-    downloads: "5k+"
-  },
-  {
-    id: 6,
-    title: "Focus Flow",
-    category: "Productivity Tool",
-    img: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?q=80&w=2672&auto=format&fit=crop",
-    downloads: "2k+"
-  }
-]
+import Image from 'next/image'
 
 // --- COMPONENTS ---
 
@@ -71,12 +20,13 @@ const WebGallery = () => {
             <motion.div style={{ x }} className="flex gap-12 md:gap-24">
                 {webProjects.map((project, i) => (
                     <div key={project.id} className="relative w-[80vw] md:w-[60vw] h-[60vh] md:h-[70vh] flex-shrink-0 group">
-                        {/* Image Container */}
                         <div className="w-full h-full overflow-hidden rounded-[2rem] border border-white/10 relative bg-black/50">
-                             <img 
+                             <Image 
                                src={project.img} 
                                alt={project.title} 
-                               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-100"
+                               fill
+                               sizes="(max-width: 768px) 80vw, 60vw"
+                               className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-100"
                              />
                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                              
@@ -122,12 +72,13 @@ const MobileStack = () => {
                    transition={{ duration: 0.8, viewport: { once: true, margin: "-10%" } }}
                    className="relative group w-full max-w-sm md:max-w-md aspect-[9/16]"
                 >
-                    {/* Phone Frame Mockup */}
                     <div className="absolute inset-0 rounded-[3rem] border-8 border-gray-900 bg-black overflow-hidden shadow-2xl z-10">
-                        <img 
+                        <Image 
                             src={project.img} 
                             alt={project.title} 
-                            className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500" 
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500" 
                         />
                         
                         {/* App UI Overlay */}
