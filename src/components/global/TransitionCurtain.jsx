@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { usePathname, useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { useState, useEffect, createContext, useContext, useCallback, useRef } from 'react'
 
 const TransitionContext = createContext(null)
@@ -53,12 +54,18 @@ export function TransitionProvider({ children }) {
         // Stall logic
         if (!loaded && prev >= 90) return prev
 
-        // Dynamic Speed
-        let increment = 0.5 
+        // Dynamic Speed - Slower & More Deliberate now
+        let increment = 0.4 // Base crawl
         if (loaded) {
-            if (prev > 95) increment = 0.5
-            else if (prev > 80) increment = 2.0
-            else increment = 4.0
+            if (isFirstLoad) {
+                // First load: Premium slow approach
+                if (prev > 95) increment = 0.2
+                else if (prev > 80) increment = 0.8
+                else increment = 1.2
+            } else {
+                // Internal Nav: High speed to clear curtain fast
+                increment = 10 
+            }
         }
         
         const next = prev + increment
@@ -67,18 +74,20 @@ export function TransitionProvider({ children }) {
     }, 16)
 
     return () => clearInterval(interval)
-  }, [isTransitioning])
+  }, [isTransitioning, isFirstLoad])
 
   // Completion trigger when progress hits 100
   useEffect(() => {
     if (progress === 100 && isTransitioning) {
+      // Faster exit for internal navigation, longer linger for first load
+      const linger = isFirstLoad ? 600 : 200
       const timer = setTimeout(() => {
         setIsTransitioning(false)
         setIsFirstLoad(false)
-      }, 600)
+      }, linger)
       return () => clearTimeout(timer)
     }
-  }, [progress, isTransitioning])
+  }, [progress, isTransitioning, isFirstLoad])
 
   return (
     <TransitionContext.Provider value={{ navigate, isTransitioning }}>
@@ -108,7 +117,36 @@ function SlideCurtain({ isActive, isFirstLoad, progress }) {
           transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
           className="fixed inset-0 z-[9999] bg-[#0a0a0a] pointer-events-auto flex items-center justify-center"
         >
-             <LoadingCounter progress={progress} />
+             {/* Only show progress on first load/refresh */}
+             {isFirstLoad ? (
+               <LoadingCounter progress={progress} />
+             ) : (
+               /* Branding Badge for internal navigation */
+               <motion.div
+                 initial={{ opacity: 0, scale: 0.8 }}
+                 animate={{ 
+                   opacity: [0, 1, 1],
+                   scale: [0.8, 1, 1],
+                   y: [0, -10, 0] 
+                 }}
+                 transition={{ 
+                   duration: 2,
+                   repeat: Infinity,
+                   ease: "easeInOut",
+                   times: [0, 0.5, 1]
+                 }}
+                 className="relative w-24 h-24 md:w-32 md:h-32 flex items-center justify-center"
+               >
+                 <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full animate-pulse" />
+                 <Image 
+                   src="/mm.png" 
+                   alt="M" 
+                   width={128}
+                   height={128}
+                   className="w-full rounded-full h-full object-contain relative z-10 opacity-40 grayscale brightness-200"
+                 />
+               </motion.div>
+             )}
         </motion.div>
       )}
     </AnimatePresence>
@@ -125,7 +163,7 @@ function LoadingCounter({ progress }) {
         transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
         className="text-white font-[family-name:var(--font-space-grotesk)] text-[12vw] leading-none font-black tracking-tighter flex items-end"
       >
-        <span>{progress}</span>
+        <span>{Math.floor(progress)}</span>
         <span className="text-[4vw] mb-[2vw] ml-2 font-light opacity-50">%</span>
       </motion.div>
     </div>
