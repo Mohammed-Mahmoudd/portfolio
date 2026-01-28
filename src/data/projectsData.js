@@ -216,15 +216,7 @@ export const projects = [
       }
     ],
     
-    results: {
-      metrics: [
-        { label: "Patient Inquiries", value: "+60%" },
-        { label: "Accessibility Score", value: "AA" },
-        { label: "Mobile Users", value: "70%" },
-        { label: "Avg. Session", value: "3.5min" }
-      ],
-      impact: "Increased patient inquiries by 60% and improved patient education accessibility."
-    },
+   
     
     images: [
       "/projects/clinic.png",
@@ -275,15 +267,7 @@ overview: {
       }
     ],
     
-    results: {
-      metrics: [
-        { label: "Projects Showcased", value: "50+" },
-        { label: "Client Inquiries", value: "+45%" },
-        { label: "Page Views", value: "10K+/mo" },
-        { label: "Load Time", value: "< 2s" }
-      ],
-      impact: "Increased client inquiries by 45% and established strong online portfolio presence."
-    },
+    
     
     images: [
       "/projects/elserag.png"
