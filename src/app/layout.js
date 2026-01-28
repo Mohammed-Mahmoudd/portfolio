@@ -25,7 +25,7 @@ export const metadata = {
     default: "Mohammed Mahmoud | Full Stack Developer",
     template: "%s | Mohammed Mahmoud"
   },
-  description: "Senior Full Stack Developer specializing in premium web experiences, high-performance mobile apps, and interactive 3D interfaces.",
+  description: "Full Stack Developer specializing in premium web experiences, high-performance mobile apps, and interactive 3D interfaces.",
   keywords: ["Full Stack Developer", "Next.js", "React Native", "Portfolio", "Web Design", "Software Engineer", "Three.js portfolio"],
   authors: [{ name: "Mohammed Mahmoud" }],
   creator: "Mohammed Mahmoud",
@@ -39,7 +39,7 @@ export const metadata = {
     url: "https://yourportfolio.com", // Replace with your domain when ready
     siteName: "Mohammed Mahmoud Portfolio",
     title: "Mohammed Mahmoud | Full Stack Developer",
-    description: "Senior Full Stack Developer specializing in premium web experiences and interactive 3D interfaces.",
+    description: "Full Stack Developer specializing in premium web experiences and interactive 3D interfaces.",
     images: [
       {
         url: "/letter-m.png",
@@ -52,7 +52,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Mohammed Mahmoud | Full Stack Developer",
-    description: "Senior Full Stack Developer specializing in premium web experiences and interactive 3D interfaces.",
+    description: "Full Stack Developer specializing in premium web experiences and interactive 3D interfaces.",
     images: ["/letter-m.png"],
   },
   robots: {
