@@ -1,13 +1,13 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { MapPin, Clock, Code2, Globe, Cpu, Zap } from 'lucide-react'
+import { MapPin, Clock, Code2, Building, Server , Users,Coffee } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 // Dynamically import Map with no SSR to avoid window is not defined errors
-const Map = dynamic(() => import('./Map'), { 
+const Map = dynamic(() => import('../home/Map'), { 
   ssr: false,
   loading: () => <div className="w-full h-full bg-zinc-900/50 animate-pulse" />
 })
@@ -27,12 +27,12 @@ const TimeWidget = () => {
         <Clock className="w-5 h-5 text-zinc-500 group-hover/card:text-cyan-400 transition-colors" />
       </div>
       <div>
-        <div className="text-4xl font-bold text-white font-[family-name:var(--font-space-grotesk)] tabular-nums tracking-tight">
+        <div className="text-3xl md:text-2xl lg:text-4xl font-bold text-white font-[family-name:var(--font-space-grotesk)] tabular-nums tracking-tight">
           {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
         </div>
         <div className="text-zinc-500 text-sm mt-1 mb-1">Cairo, Egypt (GMT+2)</div>
         <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
-          <div className="h-full bg-cyan-500/50 w-[30%] animate-pulse" />
+          <div className="h-full bg-cyan-500/50 w-[60%] animate-pulse" />
         </div>
       </div>
     </div>
@@ -63,7 +63,7 @@ const LocationWidget = ({ dragging = true }) => (
         </div>
       </div>
       <div>
-        <div className="text-2xl font-bold text-white font-[family-name:var(--font-space-grotesk)] drop-shadow-md">Base of Ops</div>
+        <div className="text-xl md:text-xl lg:text-2xl font-bold text-white font-[family-name:var(--font-space-grotesk)] drop-shadow-md">Based in</div>
         <div className="text-zinc-300 text-sm font-medium">Cairo, Egypt</div>
       </div>
     </div>
@@ -86,9 +86,9 @@ const StackWidget = () => (
         <span className="text-zinc-400 text-xs font-mono tracking-[0.2em] group-hover/card:text-purple-400 transition-colors">CORE STACK</span>
         <Code2 className="w-5 h-5 text-zinc-500 group-hover/card:text-purple-400 transition-colors" />
       </div>
-      <div className="flex flex-wrap gap-2 content-end relative z-10 mt-8">
-        {['React', 'Next.js', 'TypeScript', 'Node.js', 'Tailwind', 'Three.js', 'laravel', 'PHP', 'javascript', 'bootstrap', 'Framer Motion', 'PostgreSQL', 'Docker', 'AWS', 'Figma', 'Git'].map((tech) => (
-          <span key={tech} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs font-medium text-zinc-300 hover:bg-white/10 hover:border-purple-500/50 hover:text-white hover:shadow-[0_0_15px_-3px_rgba(168,85,247,0.4)] transition-all cursor-default relative overflow-hidden group/item">
+      <div className="flex flex-wrap gap-1.5 md:gap-0.5 lg:gap-2 content-end relative z-10 mt-auto pt-6">
+        {['React', 'Next.js', 'TypeScript', 'Node.js', 'Tailwind', 'Three.js', 'Laravel', 'PHP', 'JS', 'Bootstrap', 'Framer', 'MySQL', 'Figma', 'Git'].map((tech) => (
+          <span key={tech} className="px-2 py-1 md:px-2 md:py-2 lg:px-3 lg:py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs md:text-[10px] lg:text-xs font-medium text-zinc-300 hover:bg-white/10 hover:border-purple-500/50 hover:text-white hover:shadow-[0_0_15px_-3px_rgba(168,85,247,0.4)] transition-all cursor-default relative overflow-hidden group/item">
             <span className="relative z-10">{tech}</span>
             <span className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 group-hover/item:opacity-100 transition-opacity" />
           </span>
@@ -113,8 +113,8 @@ const StatusWidget = () => (
         </span>
       </div>
       <div className="relative z-10">
-        <div className="text-2xl font-bold text-white mb-1 tracking-tight">Available</div>
-        <div className="text-zinc-400 text-sm">Open for new projects</div>
+        <div className="text-xl md:text-xl lg:text-2xl font-bold text-white mb-1 tracking-tight">Open to work</div>
+        <div className="text-zinc-400 text-sm">Full-time / Contract</div>
       </div>
    </div>
 )
@@ -125,7 +125,7 @@ const StatCard = ({ label, value, icon: Icon }) => (
       <Icon className="w-5 h-5" />
     </div>
     <div>
-      <div className="text-2xl font-bold text-white font-[family-name:var(--font-space-grotesk)] group-hover:scale-105 transition-transform origin-left">{value}</div>
+      <div className="text-xl md:text-xl lg:text-2xl font-bold text-white font-[family-name:var(--font-space-grotesk)] group-hover:scale-105 transition-transform origin-left">{value}</div>
       <div className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">{label}</div>
     </div>
   </div>
@@ -135,7 +135,7 @@ const BentoGrid = () => {
   const isMobile = useMediaQuery('(max-width: 768px)')
 
   return (
-    <div className="relative w-full min-h-screen py-20 px-4 md:px-24 bg-black flex flex-col justify-center items-center overflow-hidden">
+    <div className="relative w-full min-h-screen py-16 md:py-20 px-4 md:px-12 lg:px-20 bg-black flex flex-col justify-center items-center overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.05)_1px,transparent_1px)] bg-[size:24px_24px]" />
       
@@ -145,12 +145,12 @@ const BentoGrid = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-12"
+          className="mb-8 md:mb-10 lg:mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white font-[family-name:var(--font-space-grotesk)] mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white font-[family-name:var(--font-space-grotesk)] mb-3 md:mb-4">
             Digital <span className="text-cyan-400">Footprint</span>
           </h2>
-          <p className="text-zinc-400 max-w-xl">A glimpse into my current status, location, and the technologies powering my work.</p>
+          <p className="text-sm md:text-base text-zinc-400 max-w-xl">A glimpse into my current status, location, and the technologies powering my work.</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-auto md:h-[500px]">
@@ -160,61 +160,60 @@ const BentoGrid = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
-            className="md:col-span-2 md:row-span-2 h-[250px] md:h-full"
+            className="md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2 lg:col-start-1 lg:row-start-1 h-[250px] md:h-full"
           >
             <LocationWidget dragging={!isMobile} />
           </motion.div>
 
 
-          {/* Time - Wide */}
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="md:col-span-1 md:row-span-1 h-[200px] md:h-full"
-          >
-            <TimeWidget />
-          </motion.div>
-
-          {/* Stack - Tall */}
+          {/* Time - Half Width on Tablet */}
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
-            className="md:col-span-1 md:row-span-2 min-h-[300px] md:h-full md:min-h-0"
+            className="md:col-span-1 md:row-span-1 lg:col-span-1 lg:col-start-3 lg:row-start-1 h-[200px] md:h-full"
           >
-            <StackWidget />
+            <TimeWidget />
           </motion.div>
 
-          {/* Status - Wide */}
+          {/* Status - Half Width on Tablet */}
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
-            className="md:col-span-1 md:row-span-1 h-[200px] md:h-full"
+            className="md:col-span-1 md:row-span-1 lg:col-span-1 lg:col-start-3 lg:row-start-2 h-[200px] md:h-full"
           >
             <StatusWidget />
           </motion.div>
 
+          {/* Stack - Full Width on Tablet */}
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="md:col-span-2 md:row-span-1 lg:col-span-1 lg:row-span-2 lg:col-start-4 lg:row-start-1 min-h-[300px] md:h-full md:min-h-0"
+          >
+            <StackWidget />
+          </motion.div>
         </div>
 
         
         {/* Bottom Stats Row */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} viewport={{ once: true }}>
-             <StatCard label="Years Exp." value="1+" icon={Zap} />
+             <StatCard label="Clients" value="5+" icon={Users} />
            </motion.div>
            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} viewport={{ once: true }}>
-             <StatCard label="Projects" value="10+" icon={Globe} />
+             <StatCard label="Companies" value="3+" icon={Building} />
            </motion.div>
            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }} viewport={{ once: true }}>
-             <StatCard label="Commits" value="100 +" icon={Code2} />
+             <StatCard label="Projects" value="10+" icon={Server} />
            </motion.div>
            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} viewport={{ once: true }}>
-             <StatCard label="Milk Tea" value="∞" icon={Cpu} />
+             <StatCard label="Milk Tea" value="∞" icon={Coffee} />
            </motion.div>
         </div>
       </div>

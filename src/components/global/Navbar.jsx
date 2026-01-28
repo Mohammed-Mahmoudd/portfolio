@@ -2,8 +2,8 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import Link from 'next/link'
 import { useState } from 'react'
+import NavLink from '@/components/global/NavLink'
 
 const navItems = [
   { name: 'Home', href: '/' },
@@ -12,39 +12,31 @@ const navItems = [
   { name: 'Contact', href: '/contact' },
 ]
 
-import { useTransition } from '@/components/TransitionCurtain'
 
-// ... existing imports
+
 
 export default function Navbar() {
-  const [hoveredIndex, setHoveredIndex] = useState(null)
+  const [hoveredIndex, setHoveredIndex] = useState(null) 
   const [isOpen, setIsOpen] = useState(false)
-  const { navigate } = useTransition()
-
-  const handleNavClick = (e, href) => {
-     e.preventDefault()
-     setIsOpen(false)
-     navigate(href)
-  }
+  const closeMenu = () => setIsOpen(false)
 
   return (
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 1, type: 'spring', stiffness: 260, damping: 20 }}
-      className={`fixed top-4 left-4 right-4 md:top-6 md:left-0 md:w-full z-[100] px-6 py-4 md:px-24 md:py-6 flex items-center justify-end transition-all duration-300 text-white rounded-2xl md:rounded-none ${
+      className={`fixed top-4 left-4 right-4 lg:top-6 lg:left-0 lg:w-full z-[100] px-6 py-4 lg:px-24 lg:py-6 flex items-center justify-end transition-all duration-300 text-white rounded-2xl lg:rounded-none ${
         isOpen ? 'bg-black' : 'bg-transparent'
-      } md:bg-transparent md:mix-blend-difference`}
+      } lg:bg-transparent lg:mix-blend-difference`}
     >
         {/* Logo Removed */}
 
         {/* Links */}
-        <div className="hidden md:flex items-center  gap-8 md:gap-12">
+        <div className="hidden lg:flex items-center  gap-8 md:gap-12">
             {navItems.map((item, index) => (
-                <Link 
+                <NavLink 
                     key={item.name} 
                     href={item.href}
-                    onClick={(e) => handleNavClick(e, item.href)}
                     className="relative text-sm uppercase tracking-widest font-medium group select-none"
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(null)}
@@ -54,7 +46,7 @@ export default function Navbar() {
                     </span>
                     {/* Hover Line */}
                     <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full" />
-                </Link>
+                </NavLink>
             ))}
             
             {/* Open to Work Badge */}
@@ -65,7 +57,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu Button */}
-        <button className="relative z-50  md:hidden text-white" onClick={() => setIsOpen(!isOpen)}>
+        <button className="relative z-50  lg:hidden text-white" onClick={() => setIsOpen(!isOpen)}>
            {isOpen ? <X /> : <Menu />}
         </button>
         {/* Mobile Menu Overlay */}
@@ -79,7 +71,7 @@ export default function Navbar() {
                 open: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
                 closed: { opacity: 0, transition: { staggerChildren: 0.02, staggerDirection: -1, delay: 0.2} }
               }}
-              className="fixed top-0 left-0 w-screen h-screen z-40 bg-[#09090B] flex flex-col items-center justify-center gap-8 md:hidden"
+              className="fixed top-0 left-0 w-screen h-screen z-40 bg-[#09090B] flex flex-col items-center justify-center gap-8 lg:hidden"
             >
               {navItems.map((item) => (
                 <motion.div
@@ -89,13 +81,13 @@ export default function Navbar() {
                     closed: { opacity: 0, y: 20, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }
                   }}
                 >
-                  <Link
+                  <NavLink
                     href={item.href}
-                    onClick={(e) => handleNavClick(e, item.href)}
+                    onClick={closeMenu}
                     className="text-6xl font-black font-[family-name:var(--font-space-grotesk)] tracking-tighter text-white hover:text-zinc-500 transition-colors"
                   >
                     {item.name}
-                  </Link>
+                  </NavLink>
                 </motion.div>
               ))}
             </motion.div>

@@ -1,7 +1,7 @@
 'use client'
 
-import WorldHero from '@/components/WorldHero'
-import Footer from '@/components/Footer'
+import WorldHero from '@/components/MyWorld/WorldHero'
+import Footer from '@/components/global/Footer'
 
 export default function World() {
   return (

@@ -1,42 +1,31 @@
-import Hero from '@/components/Hero'
-import About from '@/components/About'
-import Services from '@/components/Services'
-import BentoGrid from '@/components/BentoGrid'
-import ProjectGallery from '@/components/ProjectGallery'
-import Philosophy from '@/components/Philosophy'
-import Footer from '@/components/Footer'
-import Section from '@/components/Section'
+import Hero from '@/components/home/Hero'
+import About from '@/components/home/About'
+import BentoGrid from '@/components/home/BentoGrid'
+import ProjectGallery from '@/components/home/ProjectGallery'
+import Philosophy from '@/components/home/Philosophy'
+import Footer from '@/components/global/Footer'
 
 export default function Home() {
   return (
     <main className="w-full bg-black">
       {/* Hero Section */}
-      <div className="h-screen w-full">
-        <Hero />
-      </div>
-
-      {/* About Section */}
-      <Section id="about" background="bg-zinc-950">
-        <About />
-      </Section>
-{/* Project Gallery (Horizontal Scroll) */}
-      <ProjectGallery />
-      {/* Services Section */}
-      {/* <Section id="services" background="bg-black">
-        <Services />
-      </Section> */}
       
+        <Hero />
+      
+      {/* About Section */}
+      <div background="bg-[#09090B]/85">
+        <About />
+      </div>
+      {/* Projects Section */}
+      <ProjectGallery />
       {/* Bento Grid */}
-      <div className="min-h-screen flex items-center bg-black">
+      <div background="bg-[#09090B]/85">
         <BentoGrid />
       </div>
-
-      
-
       {/* Philosophy Section */}
-      <div>
+      
         <Philosophy />
-      </div>
+      
 
       {/* Footer Section */}
       <div className="relative z-50 w-full bg-black">

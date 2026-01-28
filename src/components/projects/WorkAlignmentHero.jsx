@@ -2,10 +2,9 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowUpRight, Monitor, Smartphone, Grid3x3 } from 'lucide-react'
+import { ArrowUpRight, Monitor, Smartphone } from 'lucide-react'
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react'
-import Link from 'next/link'
-import TransitionLink from './TransitionLink'
+import NavLink from '@/components/global/NavLink'
 import { projects } from '@/data/projectsData'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 
@@ -85,11 +84,11 @@ export default function WorkAlignmentHero() {
               className="mb-12 md:mb-16"
             >
               <h1 className="text-[12vw] md:text-[8vw] leading-[0.8] font-black tracking-tighter text-white font-[family-name:var(--font-space-grotesk)] mt-2 mb-6">
-                MY WORK
+                MY PROJECTS
               </h1>
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <p className="text-xl md:text-2xl text-zinc-300 font-light max-w-2xl">
-                  Selected projects showcasing web and mobile development expertise
+A curated selection of web and mobile projects demonstrating expertise and impact.
                 </p>
                 
                 {/* Filter Tabs */}
@@ -195,7 +194,7 @@ function ProjectCard({ project }) {
   const borderColor = isWeb ? 'border-cyan-400/20' : 'border-white/20'
   
   return (
-    <TransitionLink href={`/work/${project.id}`} className="block h-full">
+    <NavLink href={`/work/${project.id}`} className="block h-full">
       <div className={`relative bg-black/60 backdrop-blur-md border ${borderColor} rounded-2xl p-6 group hover:bg-black/80 hover:border-${accentColor}/40 transition-all duration-500 h-full flex flex-col cursor-pointer`}>
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
@@ -240,6 +239,6 @@ function ProjectCard({ project }) {
       {/* Decorative Corner */}
       <div className={`absolute bottom-0 right-0 w-16 h-16 border-r border-b ${borderColor} rounded-br-2xl opacity-20 group-hover:opacity-40 transition-opacity`} />
       </div>
-    </TransitionLink>
+    </NavLink>
   )
 }

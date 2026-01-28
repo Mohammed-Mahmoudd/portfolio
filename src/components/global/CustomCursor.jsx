@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { motion, useSpring, useMotionValue } from 'framer-motion'
 
 export default function CustomCursor() {
@@ -17,13 +17,13 @@ export default function CustomCursor() {
     y: useSpring(mouse.y, smoothOptions)
   }
 
-  const manageMouseMove = (e) => {
+  const manageMouseMove = useCallback((e) => {
     const { clientX, clientY } = e
     mouse.x.set(clientX)
     mouse.y.set(clientY)
-  }
+  }, [mouse.x, mouse.y])
 
-  const manageMouseOver = (e) => {
+  const manageMouseOver = useCallback((e) => {
     // Check for grab targets first
     if (e.target.closest('[data-cursor="grab"]')) {
       setHoverType('grab')
@@ -34,7 +34,7 @@ export default function CustomCursor() {
     } else {
       setHoverType(null)
     }
-  }
+  }, [])
 
   useEffect(() => {
     window.addEventListener('mousemove', manageMouseMove)
@@ -44,7 +44,7 @@ export default function CustomCursor() {
       window.removeEventListener('mousemove', manageMouseMove)
       window.removeEventListener('mouseover', manageMouseOver)
     }
-  }, []) // Removed mouse dependency since it's a ref/motion value
+  }, [manageMouseMove, manageMouseOver])
 
   return (
     <motion.div 

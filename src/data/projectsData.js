@@ -20,7 +20,7 @@ export const projects = [
   },
 
   techStack: {
-    frontend: ["Next.js 14", "React", "Tailwind CSS", "Framer Motion"],
+    frontend: ["Next.js","Tailwind CSS"],
     backend: ["Sanity CMS", "Next.js API Routes"],
     tools: ["Git", "Vercel", "Sanity Studio", "Google Analytics"]
   },
@@ -48,10 +48,10 @@ export const projects = [
   results: {
     metrics: [
       { label: "Page Load Time", value: "< 2s" },
-      { label: "SEO Score", value: "95/100" },
+      { label: "SEO Score", value: "100/100" },
       { label: "Uptime", value: "99.9%" }
     ],
-    impact: "Helped establish a strong digital presence for the school and improved visibility for its programs."
+    impact: "Helped establish a strong digital presence for Tchaikovsky School and improved visibility for its programs."
   },
 
   images: [
@@ -108,22 +108,11 @@ export const projects = [
         solution: "Built a clean dashboard with Bootstrap and Laravel Blade components for easy management"
       }
     ],
-    
-    results: {
-      metrics: [
-        { label: "Products Managed", value: "100+" },
-        { label: "Admin Users", value: "5+" },
-        { label: "Page Load Time", value: "< 1.5s" }
-      ],
-      impact: "Streamlined restaurant operations and improved online menu presentation."
-    },
-    
-    images: [
-      "/projects/laravel.png",],
+    images: ["/projects/laravel.png",],
     
     links: {
       live: null,
-      github: null
+      github: "https://github.com/Mohammed-Mahmoudd/restaurant"
     }
   },
   
@@ -131,7 +120,7 @@ export const projects = [
     id: 'elmetr-website',
     title: "Elmetr", 
     year: "2025", 
-    category: "Legal Platform",
+    category: "Legal Website",
     type: "web",
     tagline: "Empowering legal professionals with modern technology",
     description: "SEO-optimized legal services platform ranking #1 in search results",
@@ -180,7 +169,8 @@ export const projects = [
     },
     
     images: [
-      "/projects/elmetr.png"],
+      "/projects/elmetr.png"
+    ],
     
     links: {
       live: "https://elmetr.com",
@@ -242,7 +232,7 @@ export const projects = [
     
     links: {
       live: "https://www.thyroidgoiteruae.com",
-      github: null
+      github: "https://github.com/Mohammed-Mahmoudd/Thyroid-Goiter-Ablation-Center-UAE_Website"
     }
   },
   
@@ -256,11 +246,12 @@ export const projects = [
     description: "Professional construction company website with project portfolio",
     tech: ["PHP", "CSS3", "JavaScript"],
     
-    overview: {
-      problem: "Construction company needed a robust website to showcase projects and attract new clients.",
-      solution: "Developed a dynamic website with project gallery, service pages, and contact system using PHP backend.",
-      role: "Full-Stack Developer - Built both frontend and backend systems."
-    },
+overview: {
+  problem: "Construction company needed a website to showcase projects and allow easy updates.",
+  solution: "Built a dynamic site using PHP templates and frontend technologies, enabling reusable components and simple content management without a full backend.",
+  role: "Full-Stack Developer - Designed and implemented frontend and reusable PHP templates for content management."
+},
+
     
     techStack: {
       frontend: ["CSS3", "JavaScript", "Bootstrap"],
@@ -303,65 +294,6 @@ export const projects = [
       github: null
     }
   },
-  
-  { 
-    id: 'edumate',
-    title: "Edumate", 
-    year: "2025", 
-    category: "Education Tool",
-    type: "web",
-    tagline: "Smart study companion for students",
-    description: "Interactive learning platform helping students study more effectively",
-    tech: ["React", "Vite", "Tailwind CSS"],
-    
-    overview: {
-      problem: "Students needed better tools to organize their study materials and track progress.",
-      solution: "Created an interactive study platform with note-taking, flashcards, and progress tracking features.",
-      role: "Frontend Developer - Built the complete React application."
-    },
-    
-    techStack: {
-      frontend: ["React", "Vite", "Tailwind CSS"],
-      backend: [],
-      tools: []
-    },
-    
-    features: [
-      "Note-taking with rich text editor",
-      "Flashcard creation and study mode",
-      "Progress tracking and analytics",
-      "Study timer with Pomodoro technique",
-      "Subject organization system",
-      "Cloud sync across devices"
-    ],
-    
-    challenges: [
-      {
-        problem: "Real-time data synchronization across devices",
-        solution: "Implemented Firebase Firestore with optimistic updates for smooth UX"
-      }
-    ],
-    
-    results: {
-      metrics: [
-        { label: "Active Users", value: "200+" },
-        { label: "Study Sessions", value: "5K+" },
-        { label: "User Rating", value: "4.6/5" },
-        { label: "Retention", value: "75%" }
-      ],
-      impact: "Helped 200+ students improve their study habits and academic performance."
-    },
-    
-    images: [
-      "/projects/edumate.png",],
-    
-    links: {
-      live: "https://edumate-bay.vercel.app",
-      github: "https://github.com/Mohammed-Mahmoudd/Edumate"
-    }
-  },
-
-  // ===== MOBILE PROJECTS =====
   { 
     id: 'haven-app',
     title: "Haven", 
@@ -417,7 +349,7 @@ export const projects = [
     images: [
       "/projects/haven/home.jpeg",
       "/projects/haven/map.jpeg",
-      "/projects/haven/simulation.jpeg"
+      "/projects/haven/simulation.jpeg",
     ],
     
     links: {
@@ -425,7 +357,53 @@ export const projects = [
       github: null
     }
   },
-  
+  { 
+    id: 'edumate',
+    title: "Edumate", 
+    year: "2025", 
+    category: "Education Tool",
+    type: "web",
+    tagline: "Smart study companion for students",
+    description: "Interactive learning platform helping students study more effectively",
+    tech: ["React", "Vite", "Tailwind CSS"],
+    
+    overview: {
+      problem: "Students needed better tools to organize their study materials and track progress.",
+      solution: "Created an interactive study platform with note-taking, flashcards, and progress tracking features.",
+      role: "Frontend Developer - Built the complete React application."
+    },
+    
+    techStack: {
+      frontend: ["React", "Vite", "Tailwind CSS"],
+      backend: [],
+      tools: []
+    },
+    
+    features: [
+      "Note-taking with rich text editor",
+      "Flashcard creation and study mode",
+      "Progress tracking and analytics",
+      "Study timer with Pomodoro technique",
+      "Subject organization system",
+      "Cloud sync across devices"
+    ],
+    
+    challenges: [
+      {
+        problem: "Real-time data synchronization across devices",
+        solution: "Implemented Firebase Firestore with optimistic updates for smooth UX"
+      }
+    ],
+    images: [
+      "/projects/edumate.png",],
+    
+    links: {
+      live: "https://edumate-bay.vercel.app",
+      github: "https://github.com/Mohammed-Mahmoudd/Edumate"
+    }
+  },
+
+  // ===== MOBILE PROJECTS =====
   { 
     id: 'ts-mobile',
     title: "Tchaikovsky School App", 
@@ -434,7 +412,7 @@ export const projects = [
     type: "mobile",
     tagline: "School management in your pocket",
     description: "Mobile app streamlining school operations for students, parents, and staff",
-    tech: ["React Native", "Expo", "Node.js"],
+    tech: ["React Native", "Expo", "NativeWind", "Express"],
     
     overview: {
       problem: "School operations required multiple disconnected systems for students, parents, and administrators.",
@@ -459,7 +437,7 @@ export const projects = [
     
     challenges: [
       {
-        problem: "Managing different user roles (students, parents, teachers, admin)",
+        problem: "Managing different user roles (students, instructors, admin)",
         solution: "Implemented role-based access control with custom UI for each user type"
       },
       {
@@ -467,16 +445,6 @@ export const projects = [
         solution: "Built offline-first architecture with local storage and background sync"
       }
     ],
-    
-    results: {
-      metrics: [
-        { label: "Active Users", value: "800+" },
-        { label: "Daily Logins", value: "600+" },
-        { label: "App Rating", value: "4.8/5" },
-        { label: "Time Saved", value: "70%" }
-      ],
-      impact: "Reduced administrative workload by 70% and improved parent-school communication."
-    },
     
     images: [
       "/projects/ts-mobileApp.png"  
@@ -530,14 +498,6 @@ export const projects = [
       }
     ],
     
-    results: {
-      metrics: [
-        { label: "Active Lawyers", value: "300+" },
-        { label: "Cases Managed", value: "5,000+" },
-        { label: "Time Saved/Case", value: "2 hrs" }
-      ],
-      impact: "Streamlined legal practice management, reducing administrative overhead by 40%."
-    },
     images: [
       "/projects/elmetr-app/calls.jpeg",
       "/projects/elmetr-app/main.jpeg",
@@ -556,12 +516,12 @@ export const projects = [
     year: "2025", 
     category: "Productivity",
     type: "mobile",
-    tagline: "Organize your life, one task at a time",
+    tagline: "To Do List",
     description: "Full-stack task management app with authentication and real-time sync",
-    tech: ["React Native", "Expo", "Node.js"],
+    tech: ["React Native", "Expo", "Node.js", "Express"],
     
     overview: {
-      problem: "Users needed a simple yet powerful task management solution with secure authentication and cross-device synchronization.",
+      problem: "I need a simple yet powerful task management solution with secure authentication and cross-device synchronization.",
       solution: "Built a full-stack mobile app with JWT authentication, RESTful API for task management, and real-time updates across devices.",
       role: "Full-Stack Mobile Developer - Developed both the mobile application and backend API from scratch."
     },
@@ -591,17 +551,6 @@ export const projects = [
         solution: "Implemented optimistic updates with conflict resolution and background sync"
       }
     ],
-    
-    results: {
-      metrics: [
-        { label: "Tasks Created", value: "10,000+" },
-        { label: "Active Users", value: "300+" },
-        { label: "Completion Rate", value: "85%" },
-        { label: "Daily Engagement", value: "4.2 tasks/user" }
-      ],
-      impact: "Helped users organize 10,000+ tasks with 85% completion rate, improving productivity and task management."
-    },
-    
     images: [
       "/projects/taskly/login.jpeg",
       "/projects/taskly/categories.jpeg",

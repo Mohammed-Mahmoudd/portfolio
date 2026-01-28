@@ -6,15 +6,15 @@ import { ArrowLeft, ArrowRight, ExternalLink, Github, Monitor, Smartphone, X, La
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react'
 import Link from 'next/link'
 import Image from 'next/image'
-import TransitionLink from './TransitionLink'
+import NavLink from '../global/NavLink'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 export default function ProjectDetail({ project, adjacentProjects }) {
   const [selectedImage, setSelectedImage] = useState(null)
   const isMobile = useMediaQuery('(max-width: 768px)')
   
-  // Theme Configuration based on project type
   const isWeb = project.type === 'web'
+  
   const theme = {
     color: isWeb ? 'cyan-400' : 'purple-400',
     bg: isWeb ? 'bg-cyan-500/10' : 'bg-purple-500/10',
@@ -24,16 +24,15 @@ export default function ProjectDetail({ project, adjacentProjects }) {
     icon: isWeb ? Monitor : Smartphone
   }
 
+  const hasMetrics = project.results?.metrics && project.results.metrics.length > 0
   const Icon = theme.icon
 
   return (
-    <div className="relative w-full min-h-screen bg-[#09090B] flex items-center justify-center p-4 md:p-6 lg:p-8">
+    <div className="relative w-full min-h-screen bg-[#09090B] flex items-center justify-center p-4 md:p-5 lg:p-8">
       
       {/* Main Frame Container - Exact match to WorkAlignmentHero */}
       <div className="relative w-full h-full min-h-[calc(100vh-2rem)] md:min-h-[calc(100vh-4rem)] rounded-3xl overflow-hidden shadow-2xl border border-white/5 bg-black/40" style={{ isolation: 'isolate' }}>
-        
-        {/* Shader Background - Exact match to WorkAlignmentHero */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute inset-0 z-0 pointer-events-none">
           <div className="absolute inset-0">
             <ShaderGradientCanvas
               style={{
@@ -84,17 +83,17 @@ export default function ProjectDetail({ project, adjacentProjects }) {
 
         {/* Scrollable Content Area */}
         <div className="relative z-10 w-full h-full overflow-y-auto scrollbar-hide">
-          <div className="max-w-7xl mx-auto px-4 md:px-12 py-12">
+          <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-12">
             
             {/* Top Navigation */}
             <nav className="flex items-center justify-between gap-4 mb-12 mt-4">
-              <TransitionLink 
+              <NavLink 
                 href="/work"
                 className="group flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
               >
                 <ArrowLeft className="w-4 h-4 text-zinc-400 group-hover:text-white transition-colors" />
                 <span className="text-xs font-mono font-bold text-zinc-400 group-hover:text-white uppercase tracking-wider">Back to Review</span>
-              </TransitionLink>
+              </NavLink>
               
               <div className={`px-4 py-1.5 rounded-full ${theme.bg} ${theme.border} border flex items-center gap-2`}>
                 <Icon className={`w-3.5 h-3.5 text-${theme.color}`} />
@@ -111,15 +110,15 @@ export default function ProjectDetail({ project, adjacentProjects }) {
               transition={{ duration: 0.7 }}
               className="mb-16"
             >
-              <div className="flex flex-col md:flex-row md:items-end gap-6 md:gap-12 mb-8">
-                <h1 className="text-4xl md:text-8xl font-black text-white font-[family-name:var(--font-space-grotesk)] leading-[0.9] tracking-tight">
+              <div className="flex flex-col md:flex-row md:items-end gap-4 md:gap-8 lg:gap-12 mb-8">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white font-[family-name:var(--font-space-grotesk)] leading-[0.9] tracking-tight">
                   {project.title}
                 </h1>
-                <span className="text-xl md:text-2xl font-mono text-zinc-500 mb-2 md:mb-4">{project.year}</span>
+                <span className="text-xl md:text-2xl font-mono text-zinc-500 mb-2 md:mb-4 lg:mb-5">{project.year}</span>
               </div>
               
               <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 border-t border-white/10 pt-8">
-                <p className="text-lg md:text-2xl text-zinc-300 font-light max-w-2xl leading-relaxed">
+                <p className="text-lg md:text-xl lg:text-2xl text-zinc-300 font-light max-w-2xl leading-relaxed">
                   {project.tagline}
                 </p>
                 <div className="flex flex-wrap gap-3">
@@ -144,15 +143,15 @@ export default function ProjectDetail({ project, adjacentProjects }) {
             {/* BENTO GRID LAYOUT */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-20 animate-in fade-in slide-in-from-bottom-8 duration-1000 fill-mode-both delay-300">
               
-              {/* 1. Overview Card (Span 8) */}
-              <div className="col-span-1 md:col-span-8 bg-black/40 backdrop-blur-md border border-white/10 rounded-3xl p-8 hover:border-white/20 transition-colors group">
+              {/* 1. Overview Card (Full width on Tablet, Adaptive on Desktop) */}
+              <div className={`col-span-1 md:col-span-12 ${hasMetrics ? 'lg:col-span-8' : 'lg:col-span-12'} bg-black/40 backdrop-blur-md border border-white/10 rounded-3xl p-6 md:p-10 hover:border-white/20 transition-colors group`}>
                 <div className="flex items-center gap-3 mb-6">
                   <div className={`p-2 rounded-lg ${theme.bg}`}>
                     <Layers className={`w-5 h-5 text-${theme.color}`} />
                   </div>
                   <h3 className="text-2xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">Project Overview</h3>
                 </div>
-                <p className="text-lg text-zinc-300 leading-relaxed mb-8">
+                <p className="text-base md:text-lg text-zinc-300 leading-relaxed mb-8">
                   {project.overview.solution}
                 </p>
                 <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
@@ -161,33 +160,32 @@ export default function ProjectDetail({ project, adjacentProjects }) {
                 </div>
               </div>
 
-              {/* 2. Stats Grid (Span 4) */}
-              <div className={`col-span-1 md:col-span-4 bg-gradient-to-br ${theme.gradient} to-black/60 border ${theme.border} rounded-3xl p-8 flex flex-col justify-between relative overflow-hidden group`}>
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-${theme.color} blur-[80px] opacity-20 pointer-events-none`} />
-                
-                <div className="flex items-center gap-3 mb-6">
-                   <div className="p-2 rounded-lg bg-black/20">
-                     <TrendingUp className={`w-5 h-5 text-${theme.color}`} />
-                   </div>
-                   <h3 className="text-xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">Impact</h3>
-                </div>
-
-                <div className="grid grid-cols-1 gap-6">
-                  {project.results?.metrics?.slice(0, 3).map((metric, i) => (
-                    <div key={i} className="border-b border-white/10 pb-4 last:border-0 last:pb-0">
-                      <div className="text-3xl md:text-4xl font-black text-white font-[family-name:var(--font-space-grotesk)] mb-1">
-                        {metric.value}
-                      </div>
-                      <div className="text-sm font-mono text-zinc-400 uppercase tracking-wider">
-                        {metric.label}
-                      </div>
+              {/* 2. Stats Grid (Full width on Tablet, 4 on Desktop) - Conditional */}
+              {hasMetrics && (
+                <div className={`col-span-1 md:col-span-12 lg:col-span-4 bg-gradient-to-br ${theme.gradient} to-black/60 border ${theme.border} rounded-3xl p-6 md:p-10 flex flex-col justify-between relative overflow-hidden group`}>
+                  <div className={`absolute top-0 right-0 w-32 h-32 bg-${theme.color} blur-[80px] opacity-20 pointer-events-none`} />
+                  
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-2 rounded-lg bg-black/20">
+                      <TrendingUp className={`w-5 h-5 text-${theme.color}`} />
                     </div>
-                  ))}
-                  {!project.results?.metrics && (
-                    <div className="text-zinc-500 italic">No metrics available</div>
-                  )}
+                    <h3 className="text-xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">Impact</h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 gap-8">
+                    {project.results.metrics.slice(0, 3).map((metric, i) => (
+                      <div key={i} className="border-b sm:border-b-0 md:border-r last:border-0 border-white/10 pb-4 sm:pb-0 md:pr-8 last:pr-0 lg:border-b lg:border-r-0 lg:pb-6 lg:pr-0">
+                        <div className="text-3xl md:text-2xl lg:text-3xl font-black text-white font-[family-name:var(--font-space-grotesk)] mb-1">
+                          {metric.value}
+                        </div>
+                        <div className="text-[10px] md:text-xs font-mono text-zinc-400 uppercase tracking-wider">
+                          {metric.label}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* 3. Main Gallery (Web Grid or Carousel) */}
               <div className="col-span-1 md:col-span-12 space-y-6 mt-8">
@@ -242,7 +240,7 @@ export default function ProjectDetail({ project, adjacentProjects }) {
               </div>
 
               {/* 4. Tech Stack (Span 6) */}
-              <div className="col-span-1 md:col-span-6 mt-8 bg-black/40 backdrop-blur-sm border border-white/10 rounded-3xl p-8">
+              <div className="col-span-1 md:col-span-12 lg:col-span-6 mt-8 bg-black/40 backdrop-blur-sm border border-white/10 rounded-3xl p-6 md:p-8">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="p-2 rounded-lg bg-zinc-900">
                       <Clock className="w-5 h-5 text-zinc-400" />
@@ -252,7 +250,7 @@ export default function ProjectDetail({ project, adjacentProjects }) {
                   
                   <div className="flex flex-wrap gap-2">
                     {[...project.techStack.frontend, ...project.techStack.backend, ...project.techStack.tools].map((tech, i) => (
-                      <span key={i} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm text-zinc-300 font-mono">
+                      <span key={i} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs md:text-sm text-zinc-300 font-mono">
                         {tech}
                       </span>
                     ))}
@@ -260,7 +258,7 @@ export default function ProjectDetail({ project, adjacentProjects }) {
               </div>
 
               {/* 5. Challenges/Features (Span 6) */}
-              <div className="col-span-1 md:col-span-6 mt-8 bg-black/40 backdrop-blur-sm border border-white/10 rounded-3xl p-8">
+              <div className="col-span-1 md:col-span-12 lg:col-span-6 mt-8 bg-black/40 backdrop-blur-sm border border-white/10 rounded-3xl p-6 md:p-8">
                   <div className="flex items-center gap-3 mb-6">
                     <div className={`p-2 rounded-lg ${theme.bg}`}>
                       <CheckCircle2 className={`w-5 h-5 text-${theme.color}`} />
@@ -273,8 +271,8 @@ export default function ProjectDetail({ project, adjacentProjects }) {
                       <div key={i} className="flex gap-4">
                         <div className={`w-1.5 h-full min-h-[40px] rounded-full bg-gradient-to-b ${theme.gradient} to-transparent`} />
                         <div>
-                          <h4 className="text-white font-bold mb-1">{challenge.problem}</h4>
-                          <p className="text-sm text-zinc-400 leading-relaxed">{challenge.solution}</p>
+                          <h4 className="text-white font-bold mb-1 text-sm md:text-base">{challenge.problem}</h4>
+                          <p className="text-xs md:text-sm text-zinc-400 leading-relaxed">{challenge.solution}</p>
                         </div>
                       </div>
                     ))}
@@ -286,7 +284,7 @@ export default function ProjectDetail({ project, adjacentProjects }) {
             {/* Footer Navigation */}
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-12 border-t border-white/10">
                {adjacentProjects.prev ? (
-                 <TransitionLink href={`/work/${adjacentProjects.prev.id}`} className="group flex items-center gap-4 w-full md:w-auto p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all">
+                 <NavLink href={`/work/${adjacentProjects.prev.id}`} className="group flex items-center gap-4 w-full md:w-auto p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all">
                     <div className="p-3 rounded-full bg-black border border-white/10">
                       <ArrowLeft className="w-5 h-5 text-white" />
                     </div>
@@ -294,11 +292,11 @@ export default function ProjectDetail({ project, adjacentProjects }) {
                       <div className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-1">Previous Project</div>
                       <div className="text-white font-bold">{adjacentProjects.prev.title}</div>
                     </div>
-                 </TransitionLink>
+                 </NavLink>
                ) : <div />}
                
                {adjacentProjects.next && (
-                 <TransitionLink href={`/work/${adjacentProjects.next.id}`} className="group flex items-center justify-end gap-4 w-full md:w-auto p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all text-right">
+                 <NavLink href={`/work/${adjacentProjects.next.id}`} className="group flex items-center justify-end gap-4 w-full md:w-auto p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all text-right">
                     <div>
                       <div className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-1">Next Project</div>
                       <div className="text-white font-bold">{adjacentProjects.next.title}</div>
@@ -306,7 +304,7 @@ export default function ProjectDetail({ project, adjacentProjects }) {
                     <div className="p-3 rounded-full bg-black border border-white/10">
                       <ArrowRight className="w-5 h-5 text-white" />
                     </div>
-                 </TransitionLink>
+                 </NavLink>
                )}
             </div>
 
@@ -319,24 +317,44 @@ export default function ProjectDetail({ project, adjacentProjects }) {
       <AnimatePresence>
         {selectedImage && (
           <motion.div 
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4"
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-8"
             onClick={() => setSelectedImage(null)}
           >
-            <button className="absolute top-8 right-8 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-all">
-              <X className="w-6 h-6" />
+            {/* Close Button */}
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImage(null);
+              }}
+              className="absolute top-6 right-6 md:top-10 md:right-10 z-[210] p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-all active:scale-95 group"
+              aria-label="Close Preview"
+            >
+              <X className="w-6 h-6 md:w-8 md:h-8 group-hover:rotate-90 transition-transform duration-300" />
             </button>
+
+            {/* Image Container */}
             <motion.div 
-              initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }}
-              className="relative w-full max-w-7xl max-h-[90vh] aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+              initial={{ scale: 0.9, opacity: 0 }} 
+              animate={{ scale: 1, opacity: 1 }} 
+              exit={{ scale: 0.9, opacity: 0 }}
+              className={`relative w-full shadow-2xl border border-white/10 rounded-2xl overflow-hidden bg-black
+                ${isWeb 
+                  ? 'max-w-7xl aspect-video' 
+                  : 'max-w-[min(90vw,450px)] aspect-[9/16]'
+                }
+              `}
               onClick={e => e.stopPropagation()}
             >
               <Image 
                 src={selectedImage}
                 alt="Full View"
                 fill
-                className="object-contain bg-black"
-                sizes="100vw"
+                priority
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, 1200px"
               />
             </motion.div>
           </motion.div>

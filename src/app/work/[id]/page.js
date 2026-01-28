@@ -1,7 +1,7 @@
 import { getProjectById, getAdjacentProjects } from '@/data/projectsData'
-import ProjectDetail from '@/components/ProjectDetail'
+import ProjectDetail from '@/components/projects/ProjectDetail'
 import { notFound } from 'next/navigation'
-import Footer from '@/components/Footer'
+import Footer from '@/components/global/Footer'
 
 export default async function ProjectPage({ params }) {
   const { id } = await params

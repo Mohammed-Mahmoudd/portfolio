@@ -1,8 +1,8 @@
 'use client'
 
 import React from 'react'
-import WorkAlignmentHero from '@/components/WorkAlignmentHero'
-import Footer from '@/components/Footer'
+import WorkAlignmentHero from '@/components/projects/WorkAlignmentHero'
+import Footer from '@/components/global/Footer'
 
 export default function WorkPage() {
   return (

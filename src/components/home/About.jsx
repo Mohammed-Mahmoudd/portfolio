@@ -11,7 +11,7 @@ const techStack = [
   { name: 'Tailwind CSS', category: 'Styling' },
   { name: 'Framer Motion', category: 'Animation' },
   { name: 'MongoDB', category: 'Database' },
-  { name: 'PostgreSQL', category: 'Database' },
+  { name: 'MySQL', category: 'Database' },
 ]
 
 export default function About() {
@@ -26,20 +26,20 @@ export default function About() {
   const y = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [100, 0, 0, -100])
 
   return (
-    <div ref={containerRef} className="relative w-full h-full flex items-center justify-center px-4 md:px-24 py-12 md:py-0">
+    <div ref={containerRef} className="relative w-full min-h-screen bg-[#09090B]/85 flex items-center justify-center overflow-visible flex items-center justify-center px-4 md:px-12 lg:px-20 py-12 md:py-0">
       <motion.div 
         style={{ opacity, y }}
         className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center"
       >
         {/* Left: About Text */}
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-5 lg:space-y-6">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-7xl font-black tracking-tighter text-white font-[family-name:var(--font-space-grotesk)]">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tighter text-white font-[family-name:var(--font-space-grotesk)]">
               Building Digital
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
@@ -53,11 +53,9 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="text-base md:text-lg text-zinc-400 leading-relaxed"
+            className="text-sm md:text-base lg:text-lg text-zinc-400 leading-relaxed"
           >
-            I&apos;m a full-stack developer passionate about creating scalable, 
-            performant web applications. I combine strategic thinking from chess 
-            with the discipline from fitness to build solutions that matter.
+            I&apos;m a full-stack developer who loves building web apps that actually work and scale. I approach coding the way I play chess — strategically — and bring the discipline I&apos;ve learned from fitness into every project.
           </motion.p>
 
 
@@ -66,10 +64,9 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true }}
-            className="text-base md:text-lg text-zinc-400 leading-relaxed"
+            className="text-sm md:text-base lg:text-lg text-zinc-400 leading-relaxed"
           >
-            Specialized in modern JavaScript frameworks, I focus on delivering 
-            interactive experiences with clean, maintainable code.
+           I mostly work with modern JavaScript frameworks, crafting interactive experiences that are both clean and maintainable.
           </motion.p>
         </div>
 
