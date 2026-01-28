@@ -131,7 +131,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.5, duration: 1 }}
-          className="absolute bottom-8 right-0 left-0 md:left-auto md:right-24 z-20 flex justify-center md:justify-end items-center mb-20 gap-4"
+          className="absolute bottom-8 right-0 left-0 md:left-auto md:right-24 z-20 flex justify-center md:justify-end items-center md:mb-20 lg:mb-0   gap-4"
         >
           <span className="text-xs uppercase tracking-[0.2em] text-zinc-500 font-[family-name:var(--font-space-grotesk)]">Scroll to explore</span>
           <div
