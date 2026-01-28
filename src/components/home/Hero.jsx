@@ -24,6 +24,7 @@ export default function Hero() {
           <ShaderGradientCanvas
             pixelDensity={isMobile ? 0.5 : 0.75}
             fov={isMobile ? 30 : 50}
+            style={{position: 'absolute'}}
             pointerEvents='none'
           >
             <ShaderGradient

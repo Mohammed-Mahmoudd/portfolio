@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
+import Script from "next/script";
 import Navbar from "@/components/global/Navbar";
 import ClientLayout from "@/components/global/ClientLayout";
 import CustomCursor from "@/components/global/CustomCursor";
@@ -64,6 +65,21 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-QF537PGQEV"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-QF537PGQEV');
+          `}
+        </Script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} antialiased bg-black cursor-none`}
       >
