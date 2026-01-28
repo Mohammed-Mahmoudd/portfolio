@@ -61,7 +61,7 @@ function SlideCurtain({ isActive, isFirstLoad, isPageLoaded, onComplete }) {
           initial={{ y: isFirstLoad ? '0%' : '100%' }}
           animate={{ y: '0%' }}
           exit={{ y: '-100%' }}
-          transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+          transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
           className="fixed inset-0 z-[9999] bg-[#0a0a0a] pointer-events-auto flex items-center justify-center"
         >
              <LoadingCounter 
@@ -95,21 +95,28 @@ function LoadingCounter({ isPageLoaded, onComplete }) {
               return 
           }
 
-          // Move faster if loaded (catch up)
-          const increment = loaded ? 5 : 1
+          // Smooth non-linear increment for a more premium feel
+          let increment = 0.3 // base crawl
+          if (loaded) {
+              // Decelerate as we approach 100% for an organic finish
+              if (currentProgress > 95) increment = 0.1
+              else if (currentProgress > 85) increment = 0.5
+              else increment = 1.5 // catch up phase
+          }
+          
           currentProgress += increment
           
           if (currentProgress >= 100) {
             clearInterval(interval)
             currentProgress = 100
-            // Wait a tiny bit at 100 before closing
+            // Linger at 100% for a moment before clearing the curtain
             setTimeout(() => {
                 onComplete()
-            }, 200)
+            }, 600)
           }
           
-          setProgress(currentProgress)
-      }, 20) // 20ms speed for smoother animation
+          setProgress(Math.floor(currentProgress))
+      }, 16) // ~60fps logic for smoother counting
 
       // Cleanup function for the interval
       return () => clearInterval(interval)
