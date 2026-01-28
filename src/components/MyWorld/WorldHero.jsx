@@ -9,6 +9,7 @@ import { useMediaQuery } from '@/hooks/useMediaQuery'
 export default function WorldHero() {
   const containerRef = useRef(null)
   const isMobile = useMediaQuery('(max-width: 768px)')
+  const isTablet = useMediaQuery('(min-width: 579px) and (max-width: 1024px)')
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -16,19 +17,23 @@ export default function WorldHero() {
   })
 
   // Dramatic sphere transforms
-  // Start HUGE (2.5), then shrink to side (0.6), then center (0.8)
+  // Refined for all breakpoints
   const sphereScale = useTransform(scrollYProgress,
     [0, 0.2, 0.8, 1],
     isMobile 
       ? [1.2, 0.4, 0.4, 0.6] 
-      : [1.8, 0.6, 0.6, 1] // Start at 1.8 on desktop/tablet to be less overwhelming initially
+      : isTablet
+        ? [2.2, 0.9, 0.9, 1.2] // Larger base and side-view for tablets (0.6 -> 0.9)
+        : [2.5, 0.65, 0.65, 1] // Desktop remains dramatic
   )
 
   const sphereX = useTransform(scrollYProgress, 
     [0, 0.2, 0.4, 0.6, 0.8, 1],
     isMobile 
       ? [0, 0, 0, 0, 0, 0] // Keep centered on mobile
-      : [0, -25, 25, -25, 0, 0] // Slightly reduced lateral movement (35->25) for better tablet fit
+      : isTablet
+        ? [0, -25, 25, -25, 0, 0] // Slightly tighter movement for tablets to keep it clear
+        : [0, -35, 35, -35, 0, 0] // Full dramatic movement for desktop
   )
 
   const sphereY = useTransform(scrollYProgress,

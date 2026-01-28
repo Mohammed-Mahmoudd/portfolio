@@ -19,7 +19,7 @@ export default function Footer() {
               href="/contact"
               className="inline-flex items-center justify-center md:justify-start gap-4 px-6 py-3.5 md:px-8 md:py-4 rounded-full bg-white text-black font-bold text-base md:text-lg hover:bg-cyan-400 transition-all duration-300 w-full md:w-auto"
             >
-              JUST A
+              Contact Me
               <div className="w-2 h-2 rounded-full bg-black animate-pulse" />
             </NavLink>
           </div>
