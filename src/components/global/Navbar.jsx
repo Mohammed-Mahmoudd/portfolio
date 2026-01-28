@@ -8,7 +8,7 @@ import NavLink from '@/components/global/NavLink'
 const navItems = [
   { name: 'Home', href: '/' },
   { name: 'My World', href: '/world' },
-  { name: 'Work', href: '/work' },
+  { name: 'Projects', href: '/work' },
   { name: 'Contact', href: '/contact' },
 ]
 
