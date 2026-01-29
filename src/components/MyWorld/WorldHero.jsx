@@ -1,7 +1,17 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import Globe3D, { WorldBackground } from './Globe3D'
+import dynamic from 'next/dynamic'
+
+const Globe3D = dynamic(() => import('./Globe3D'), { 
+  ssr: false,
+  loading: () => <div className="w-full h-full bg-zinc-950/20 animate-pulse rounded-full" />
+})
+
+const WorldBackground = dynamic(() => import('./Globe3D').then(mod => mod.WorldBackground), { 
+  ssr: false 
+})
+
 import { ArrowDown } from 'lucide-react'
 import { useRef } from 'react'
 import { useMediaQuery } from '@/hooks/useMediaQuery'

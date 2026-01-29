@@ -48,7 +48,7 @@ export default function ProjectDetail({ project, adjacentProjects }) {
                 wireframe={false}
                 shader="defaults"
                 uTime={0}
-                uSpeed={0.3}
+                uSpeed={0.1}
                 uStrength={0.3}
                 uDensity={isMobile ? 0.4 : 0.8}
                 uFrequency={5.5}

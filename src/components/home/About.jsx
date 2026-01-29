@@ -55,7 +55,7 @@ export default function About() {
             viewport={{ once: true }}
             className="text-sm md:text-base lg:text-lg text-zinc-400 leading-relaxed"
           >
-            I&apos;m a full-stack developer who loves building web apps that actually work and scale. I approach coding the way I play chess — strategically — and bring the discipline I&apos;ve learned from fitness into every project.
+            I&apos;m a full-stack developer currently building at <span className="text-white font-bold">Tchaikovsky School</span>, backed by a 3-year specialized technical foundation from <span className="text-white font-bold">WE School for Applied Technology</span>. I approach coding the way I play chess — strategically — and bring the discipline I&apos;ve learned from fitness into every project.
           </motion.p>
 
 

@@ -18,62 +18,62 @@ export default function WorkAlignmentHero() {
 
   return (
     <div className="relative w-full min-h-screen bg-[#09090B] flex items-center justify-center p-6 md:p-8">
-      {/* Inner Frame */}
-      <div className="relative w-full h-full min-h-[calc(100vh-3rem)] md:min-h-[calc(100vh-4rem)] rounded-3xl overflow-hidden shadow-2xl border border-white/5 bg-black/40" style={{ isolation: 'isolate' }}>
-        
-        {/* Shader Background */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute inset-0">
-            <ShaderGradientCanvas
-              style={{
-                width: '100%',
-                height: '100%',
-              }}
-              pixelDensity={isMobile ? 0.6 : 1}
-              pointerEvents="none"
-              
-            >
-              <ShaderGradient
-                animate="on"
-                type="sphere"
-                wireframe={false}
-                shader="defaults"
-                uTime={0}
-                uSpeed={0.3}
-                uStrength={0.3}
-                uDensity={0.8}
-                uFrequency={5.5}
-                uAmplitude={3.2}
-                positionX={-0.1}
-                positionY={0}
-                positionZ={0}
-                rotationX={0}
-                rotationY={130}
-                rotationZ={70}
-                color1="#2f5153"
-                color2="#053964"
-                color3="#384154"
-                reflection={0.4}
-                cAzimuthAngle={212}
-                cPolarAngle={180}
-                cDistance={0.5}
-                cameraZoom={isMobile ? 12 : 15.1}
-                lightType="env"
-                brightness={0.8}
-                envPreset="city"
-                grain="on"
-                toggleAxis={false}
-                zoomOut={false}
-                hoverState=""
-                enableTransition={false}
-              />
-            </ShaderGradientCanvas>
-          </div>
-          <div className="absolute inset-0 bg-black/40" />
+      
+      {/* Fixed Shader Background - In outer container */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0">
+          <ShaderGradientCanvas
+            style={{
+              width: '100%',
+              height: '100%',
+            }}
+            pixelDensity={isMobile ? 0.6 : 1}
+            pointerEvents="none"
+          >
+            <ShaderGradient
+              animate="on"
+              type="sphere"
+              wireframe={false}
+              shader="defaults"
+              uTime={0}
+              uSpeed={0.1}
+              uStrength={0.3}
+              uDensity={0.8}
+              uFrequency={5.5}
+              uAmplitude={3.2}
+              positionX={-0.1}
+              positionY={0}
+              positionZ={0}
+              rotationX={0}
+              rotationY={130}
+              rotationZ={70}
+              color1="#2f5153"
+              color2="#04444f"
+              color3="#384154"
+              reflection={0.4}
+              cAzimuthAngle={212}
+              cPolarAngle={180}
+              cDistance={0.5}
+              cameraZoom={isMobile ? 12 : 15.1}
+              lightType="env"
+              brightness={0.8}
+              envPreset="city"
+              grain="on"
+              toggleAxis={false}
+              zoomOut={false}
+              hoverState=""
+              enableTransition={false}
+            />
+          </ShaderGradientCanvas>
         </div>
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
 
+      {/* Inner Frame */}
+      <div className="relative z-10 w-full h-full min-h-[calc(100vh-3rem)] md:min-h-[calc(100vh-4rem)] rounded-3xl overflow-hidden shadow-2xl border border-white/5 bg-transparent">
+        
         {/* Content Container - Scrollable */}
-        <div className="relative z-10 w-full h-full overflow-y-auto">
+        <div className="relative w-full h-full overflow-y-auto">
           <div className="max-w-7xl mx-auto px-8 md:px-16 py-12 md:py-20">
             
             {/* Header */}
@@ -92,10 +92,10 @@ A curated selection of web and mobile projects demonstrating expertise and impac
                 </p>
                 
                 {/* Filter Tabs */}
-                <div className="flex items-center gap-2 bg-black/40 backdrop-blur-sm border border-white/10 rounded-full p-1.5">
+                <div className="flex items-center w-full md:w-auto gap-1 md:gap-2 bg-black/40 backdrop-blur-sm border border-white/10 rounded-2xl md:rounded-full p-1 md:p-1.5">
                   <button
                     onClick={() => setActiveFilter('all')}
-                    className={`px-6 py-2 rounded-full text-sm font-mono transition-all duration-300 ${
+                    className={`flex-1 md:flex-none px-4 md:px-6 py-2 rounded-xl md:rounded-full text-xs md:text-sm font-mono transition-all duration-300 ${
                       activeFilter === 'all' 
                         ? 'bg-white text-black' 
                         : 'text-zinc-400 hover:text-white'
@@ -105,24 +105,24 @@ A curated selection of web and mobile projects demonstrating expertise and impac
                   </button>
                   <button
                     onClick={() => setActiveFilter('web')}
-                    className={`px-6 py-2 rounded-full text-sm font-mono transition-all duration-300 flex items-center gap-2 ${
+                    className={`flex-1 md:flex-none px-4 md:px-6 py-2 rounded-xl md:rounded-full text-xs md:text-sm font-mono transition-all duration-300 flex items-center justify-center gap-2 ${
                       activeFilter === 'web' 
                         ? 'bg-cyan-400 text-black' 
                         : 'text-zinc-400 hover:text-cyan-400'
                     }`}
                   >
-                    <Monitor className="w-4 h-4" />
+                    <Monitor className="w-3.5 h-3.5 md:w-4 md:h-4" />
                     WEB
                   </button>
                   <button
                     onClick={() => setActiveFilter('mobile')}
-                    className={`px-6 py-2 rounded-full text-sm font-mono transition-all duration-300 flex items-center gap-2 ${
+                    className={`flex-1 md:flex-none px-4 md:px-6 py-2 rounded-xl md:rounded-full text-xs md:text-sm font-mono transition-all duration-300 flex items-center justify-center gap-2 ${
                       activeFilter === 'mobile' 
                         ? 'bg-white text-black' 
                         : 'text-zinc-400 hover:text-white'
                     }`}
                   >
-                    <Smartphone className="w-4 h-4" />
+                    <Smartphone className="w-3.5 h-3.5 md:w-4 md:h-4" />
                     MOBILE
                   </button>
                 </div>
