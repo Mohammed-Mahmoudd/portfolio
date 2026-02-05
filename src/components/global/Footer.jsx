@@ -44,7 +44,10 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-xs md:text-sm text-zinc-600 border-t border-white/5 pt-8">
-          <p>© {currentYear} Mohammed Mahmoud. All rights reserved.</p>
+          <div className="flex flex-col gap-1">
+            <p>© {currentYear} Mohammed Mahmoud. All rights reserved.</p>
+            <p className="text-[10px] text-zinc-700 uppercase tracking-widest">Based in Cairo, Egypt</p>
+          </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-green-500" />
             <span>Live & Active</span>

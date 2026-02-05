@@ -1,23 +1,24 @@
-'use client'
 
 import React from 'react'
-import WorkAlignmentHero from '@/components/projects/WorkAlignmentHero'
-import Experience from '@/components/projects/Experience'
-import Footer from '@/components/global/Footer'
+import WorkContent from './WorkContent'
+
+export const metadata = {
+  title: "Work | Mohammed Mahmoud",
+  description: "Explore my selected works as a Web & Full Stack Developer, featuring premium web experiences, mobile applications, and interactive 3D designs.",
+  alternates: {
+    canonical: '/work',
+  },
+  openGraph: {
+    title: "Work | Mohammed Mahmoud",
+    description: "Explore my selected works as a Web & Full Stack Developer, featuring premium web experiences, mobile applications, and interactive 3D designs.",
+    url: "https://mohammed-mahmoud.com/work",
+  },
+  twitter: {
+    title: "Work | Mohammed Mahmoud",
+    description: "Explore my selected works as a Web & Full Stack Developer, featuring premium web experiences, mobile applications, and interactive 3D designs.",
+  },
+}
 
 export default function WorkPage() {
-  return (
-    <main className="w-full bg-black">
-       <WorkAlignmentHero />
-       
-       {/* Experience Section */}
-       <div className="relative z-10">
-         <Experience />
-       </div>
-       
-       <div className="relative z-50 w-full bg-black">
-        <Footer />
-       </div>
-    </main>
-  )
+  return <WorkContent />
 }

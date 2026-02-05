@@ -1,13 +1,25 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react'
+import dynamic from 'next/dynamic'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowDown } from 'lucide-react'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
+const HeroBackground = dynamic(() => import('./HeroBackground'), { 
+  ssr: false,
+  loading: () => <div className="fixed inset-0 bg-[#09090B]" /> 
+})
 
 export default function Hero() {
   const isMobile = useMediaQuery('(max-width: 768px)')
+  const [load3D, setLoad3D] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoad3D(true)
+    }, 100)
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     // Outercontainer with black background (the "TV frame")
@@ -21,47 +33,8 @@ export default function Hero() {
           clipPath: isMobile ? 'inset(16px 16px 16px 16px round 24px)' : 'inset(24px 24px 24px 24px round 24px)',
           WebkitClipPath: isMobile ? 'inset(16px 16px 16px 16px round 24px)' : 'inset(24px 24px 24px 24px round 24px)'
         }}>
-          <ShaderGradientCanvas
-            pixelDensity={isMobile ? 0.5 : 0.75}
-            fov={isMobile ? 30 : 50}
-            style={{position: 'absolute'}}
-            pointerEvents='none'
-          >
-            <ShaderGradient
-              animate="on"
-              type="sphere"
-              wireframe={false}
-              shader="defaults"
-              uTime={0}
-              uSpeed={0.1}
-              uStrength={0.3}
-              uDensity={0.8}
-              uFrequency={5.5}
-              uAmplitude={3.2}
-              positionX={-0.1}
-              positionY={0}
-              positionZ={0}
-              rotationX={0}
-              rotationY={130}
-              rotationZ={70}
-              color1="#d4b584"
-              color2="#516b89"
-              color3="#622828"
-              reflection={0.4}
-              cAzimuthAngle={270}
-              cPolarAngle={180}
-              cDistance={0.5}
-              cameraZoom={isMobile ? 8 : 15.1}
-              lightType="env"
-              brightness={0.8}
-              envPreset="city"
-              grain="on"
-              toggleAxis={false}
-              zoomOut={false}
-              hoverState=""
-              enableTransition={false}
-            />
-          </ShaderGradientCanvas>
+          {load3D && <HeroBackground isMobile={isMobile} />}
+
           <div className="absolute inset-0 bg-black/65 pointer-events-none" />
         </div>
 

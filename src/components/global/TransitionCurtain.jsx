@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { usePathname, useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { useState, useEffect, createContext, useContext, useCallback, useRef } from 'react'
+import { useState, useEffect, createContext, useContext, useCallback, useMemo, useRef } from 'react'
 
 const TransitionContext = createContext(null)
 
@@ -12,35 +12,63 @@ export function TransitionProvider({ children }) {
   const pathname = usePathname()
   const [isTransitioning, setIsTransitioning] = useState(true)
   const [isFirstLoad, setIsFirstLoad] = useState(true)
-  const [isPageLoaded, setIsPageLoaded] = useState(false)
-  const [progress, setProgress] = useState(0)
+  // Track page loaded state for stall logic
   const isLoadedRef = useRef(false)
 
-  // Navigate function
-  const navigate = (href) => {
+  // Navigate function - Stable reference
+  const navigate = useCallback((href) => {
     if (href === pathname) return
     setIsTransitioning(true)
-    setIsPageLoaded(false)
     isLoadedRef.current = false
-    setProgress(0) // Reset progress for new navigation
     
     setTimeout(() => {
       router.push(href)
     }, 600) 
-  }
+  }, [pathname, router])
 
-  // Pathname change sync
+  // Pathname change sync - marks page as loaded
   useEffect(() => {
+    // Small timeout to ensure hydration/mount is done
     const t = setTimeout(() => {
-      setIsPageLoaded(true)
       isLoadedRef.current = true
     }, 10)
     return () => clearTimeout(t)
   }, [pathname])
 
-  // Progress Interval Management
+  const onAnimationComplete = useCallback(() => {
+    setIsTransitioning(false)
+    setIsFirstLoad(false)
+  }, [])
+
+  // Memoize context to prevent consumer re-renders
+  const contextValue = useMemo(() => ({ navigate, isTransitioning }), [navigate, isTransitioning])
+
+  return (
+    <TransitionContext.Provider value={contextValue}>
+      {children}
+      <SlideCurtain 
+        isActive={isTransitioning} 
+        isFirstLoad={isFirstLoad}
+        isLoadedRef={isLoadedRef}
+        onComplete={onAnimationComplete}
+      />
+    </TransitionContext.Provider>
+  )
+}
+
+export function useTransition() {
+  return useContext(TransitionContext)
+}
+
+function SlideCurtain({ isActive, isFirstLoad, isLoadedRef, onComplete }) {
+  const [progress, setProgress] = useState(0)
+
+  // Progress Interval Management - internalized to prevent parent re-renders
   useEffect(() => {
-    if (!isTransitioning) return
+    if (!isActive) return
+
+    // Reset progress on activation
+    setProgress(0)
 
     const interval = setInterval(() => {
       const loaded = isLoadedRef.current
@@ -54,16 +82,14 @@ export function TransitionProvider({ children }) {
         // Stall logic
         if (!loaded && prev >= 90) return prev
 
-        // Dynamic Speed - Slower & More Deliberate now
-        let increment = 0.4 // Base crawl
+        // Dynamic Speed
+        let increment = 0.4
         if (loaded) {
             if (isFirstLoad) {
-                // First load: Premium slow approach
                 if (prev > 95) increment = 0.2
                 else if (prev > 80) increment = 0.8
                 else increment = 1.2
             } else {
-                // Internal Nav: High speed to clear curtain fast
                 increment = 10 
             }
         }
@@ -74,38 +100,17 @@ export function TransitionProvider({ children }) {
     }, 16)
 
     return () => clearInterval(interval)
-  }, [isTransitioning, isFirstLoad])
+  }, [isActive, isFirstLoad, isLoadedRef])
 
-  // Completion trigger when progress hits 100
+  // Trigger completion
   useEffect(() => {
-    if (progress === 100 && isTransitioning) {
-      // Faster exit for internal navigation, longer linger for first load
+    if (progress === 100 && isActive) {
       const linger = isFirstLoad ? 600 : 200
-      const timer = setTimeout(() => {
-        setIsTransitioning(false)
-        setIsFirstLoad(false)
-      }, linger)
+      const timer = setTimeout(onComplete, linger)
       return () => clearTimeout(timer)
     }
-  }, [progress, isTransitioning, isFirstLoad])
+  }, [progress, isActive, isFirstLoad, onComplete])
 
-  return (
-    <TransitionContext.Provider value={{ navigate, isTransitioning }}>
-      {children}
-      <SlideCurtain 
-        isActive={isTransitioning} 
-        isFirstLoad={isFirstLoad}
-        progress={progress}
-      />
-    </TransitionContext.Provider>
-  )
-}
-
-export function useTransition() {
-  return useContext(TransitionContext)
-}
-
-function SlideCurtain({ isActive, isFirstLoad, progress }) {
   return (
     <AnimatePresence mode='wait'>
       {isActive && (
@@ -117,11 +122,9 @@ function SlideCurtain({ isActive, isFirstLoad, progress }) {
           transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
           className="fixed inset-0 z-[9999] bg-[#0a0a0a] pointer-events-auto flex items-center justify-center"
         >
-             {/* Only show progress on first load/refresh */}
              {isFirstLoad ? (
                <LoadingCounter progress={progress} />
              ) : (
-               /* Branding Badge for internal navigation */
                <motion.div
                  initial={{ opacity: 0, scale: 0.8 }}
                  animate={{ 

@@ -1,9 +1,18 @@
 import Hero from '@/components/home/Hero'
-import About from '@/components/home/About'
-import BentoGrid from '@/components/home/BentoGrid'
-import ProjectGallery from '@/components/home/ProjectGallery'
-import Philosophy from '@/components/home/Philosophy'
 import Footer from '@/components/global/Footer'
+import dynamic from 'next/dynamic'
+const About = dynamic(() => import('@/components/home/About'))
+const BentoGrid = dynamic(() => import('@/components/home/BentoGrid'))
+const ProjectGallery = dynamic(() => import('@/components/home/ProjectGallery'))
+const Philosophy = dynamic(() => import('@/components/home/Philosophy'))
+
+export const metadata = {
+  title: "Mohammed Mahmoud | Full Stack & Web Developer",
+  description: "Expert Web & Full Stack Developer specializing in premium web experiences, high-performance mobile apps, and interactive 3D interfaces.",
+  alternates: {
+    canonical: '/',
+  },
+}
 
 export default function Home() {
   return (
@@ -13,14 +22,14 @@ export default function Home() {
         <Hero />
       
       {/* About Section */}
-      <div background="bg-[#09090B]/85">
+      <div className="bg-[#09090B]/85">
         <About />
       </div>
       {/* Projects Section */}
-      <ProjectGallery />
+        <ProjectGallery />
       {/* Bento Grid */}
-      <div background="bg-[#09090B]/85">
-        <BentoGrid />
+      <div className="bg-[#09090B]/85">
+          <BentoGrid />
       </div>
       {/* Philosophy Section */}
       

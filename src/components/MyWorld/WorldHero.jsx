@@ -13,13 +13,22 @@ const WorldBackground = dynamic(() => import('./Globe3D').then(mod => mod.WorldB
 })
 
 import { ArrowDown } from 'lucide-react'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 export default function WorldHero() {
   const containerRef = useRef(null)
   const isMobile = useMediaQuery('(max-width: 768px)')
   const isTablet = useMediaQuery('(min-width: 579px) and (max-width: 1024px)')
+  const [load3D, setLoad3D] = useState(false)
+
+  // Defer heavy 3D loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoad3D(true)
+    }, 100)
+    return () => clearTimeout(timer)
+  }, [])
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -65,7 +74,7 @@ export default function WorldHero() {
         {/* Inner Frame Content */}
         <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl border border-white/5 bg-black/40">
           
-          <WorldBackground />
+          {load3D && <WorldBackground />}
 
           {/* 3D Globe - Animated */}
           <motion.div 
@@ -77,7 +86,7 @@ export default function WorldHero() {
             className="absolute inset-0 flex items-center justify-center pointer-events-none"
           >
             <div className="w-full h-full">
-              <Globe3D />
+              {load3D && <Globe3D />}
             </div>
           </motion.div>
 

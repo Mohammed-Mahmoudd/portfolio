@@ -1,9 +1,11 @@
-'use client'
+  'use client'
 
 import { useEffect, useState, useCallback } from 'react'
 import { motion, useSpring, useMotionValue } from 'framer-motion'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 export default function CustomCursor() {
+  const isMobile = useMediaQuery('(max-width: 768px)')
   const [hoverType, setHoverType] = useState(null) // null | 'pointer' | 'grab'
   
   const mouse = {
@@ -37,6 +39,8 @@ export default function CustomCursor() {
   }, [])
 
   useEffect(() => {
+    if (isMobile) return
+
     window.addEventListener('mousemove', manageMouseMove)
     window.addEventListener('mouseover', manageMouseOver)
     
@@ -44,7 +48,9 @@ export default function CustomCursor() {
       window.removeEventListener('mousemove', manageMouseMove)
       window.removeEventListener('mouseover', manageMouseOver)
     }
-  }, [manageMouseMove, manageMouseOver])
+  }, [manageMouseMove, manageMouseOver, isMobile])
+
+  if (isMobile) return null
 
   return (
     <motion.div 
