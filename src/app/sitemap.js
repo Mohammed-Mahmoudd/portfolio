@@ -1,5 +1,14 @@
+import { projects } from '@/data/projectsData'
+
 export default function sitemap() {
   const baseUrl = 'https://mohammed-mahmoud.com'
+
+  const projectRoutes = projects.map((project) => ({
+    url: `${baseUrl}/work/${project.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }))
 
   return [
     {
@@ -26,5 +35,6 @@ export default function sitemap() {
       changeFrequency: 'monthly',
       priority: 0.5,
     },
+    ...projectRoutes,
   ]
 }
