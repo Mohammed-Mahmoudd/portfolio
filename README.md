@@ -1,7 +1,7 @@
 <div align="center">
 
 <!-- Animated Header Banner -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,40:0a0a1a,100:0d1b3e&height=200&section=header&text=MOHAMMED%20MAHMOUD&fontSize=50&fontColor=ffffff&fontAlignY=38&desc=Full%20Stack%20Web%20%26%20Mobile%20App%20Developer&descSize=16&descAlignY=62&animation=fadeIn&fontFamily=georgia" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,40:0a0a1a,100:0d1b3e&height=200&section=header&text=MOHAMMED%20MAHMOUD&fontSize=50&fontColor=ffffff&fontAlignY=38&desc=Full%20Stack%20Web%20and%20Mobile%20App%20Developer&descSize=16&descAlignY=62&animation=fadeIn&fontFamily=georgia" width="100%"/>
 
 <!-- Typing Animation -->
 <a href="https://mohammed-mahmoud.com">
