@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
 
-## Getting Started
+<!-- Animated Header Banner -->
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,40:0a0a1a,100:0d1b3e&height=200&section=header&text=MOHAMMED%20MAHMOUD&fontSize=50&fontColor=ffffff&fontAlignY=38&desc=Frontend%20Developer%20%2F%20Scalable%20Apps&descSize=16&descAlignY=62&animation=fadeIn&fontFamily=georgia" width="100%"/>
 
-First, run the development server:
+<!-- Typing Animation -->
+<a href="https://mohammed-mahmoud.com">
+  <img src="https://readme-typing-svg.demolab.com?font=Cormorant+Garamond&size=22&duration=3000&pause=1000&color=4FC3F7&center=true&vCenter=true&width=600&lines=Building+Scalable+Apps.;Open+to+Work.;Frontend+Developer+based+in+Cairo." alt="Typing SVG" />
+</a>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<br/>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<!-- Divider -->
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+</div>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+<br/>
 
-## Learn More
+## `◈` &nbsp; About
 
-To learn more about Next.js, take a look at the following resources:
+> **Mohammed Mahmoud** is a frontend developer based in Cairo, Egypt — building clean, performant, and scalable web applications with a sharp eye for design and detail.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+From e-commerce platforms to personal portfolios, the work spans full product builds with modern stacks, thoughtful UI, and experiences that hold up at scale.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+<br/>
 
-## Deploy on Vercel
+<div align="center">
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+</div>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<br/>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## `◈` &nbsp; Stack
+
+<div align="center">
+
+| Layer | Technology |
+|:---|:---|
+| **Framework** | Next.js · React |
+| **Styling** | Tailwind CSS · Framer Motion |
+| **CMS** | Sanity |
+| **Language** | TypeScript · JavaScript |
+| **Tools** | Git · Vercel · Figma |
+| **Domain** | [mohammed-mahmoud.com](https://mohammed-mahmoud.com) |
+
+</div>
+
+<br/>
+
+<div align="center">
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+</div>
+
+<br/>
+
+## `◈` &nbsp; Selected Work
+
+<table>
+<tr>
+<td width="50%">
+
+**Miveron**
+Luxury watch e-commerce platform. Dark editorial identity, full cart and checkout experience.
+[miveron.com](https://miveron.com)
+
+</td>
+<td width="50%">
+
+**RIVA**
+Premium accessories store for women. WhatsApp checkout, curated catalogue, Sanity CMS.
+[itsriva.com](https://itsriva.com)
+
+</td>
+</tr>
+</table>
+
+<br/>
+
+<div align="center">
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+</div>
+
+<br/>
+
+## `◈` &nbsp; Connect
+
+<div align="center">
+
+<br/>
+
+[![Portfolio](https://img.shields.io/badge/mohammed--mahmoud.com-0a0a1a?style=for-the-badge&logoColor=4FC3F7&labelColor=0d1b3e)](https://mohammed-mahmoud.com)
+&nbsp;
+[![GitHub](https://img.shields.io/badge/GitHub-0a0a1a?style=for-the-badge&logo=github&logoColor=4FC3F7&labelColor=0d1b3e)](https://github.com/Mohammed-Mahmoudd)
+&nbsp;
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0a0a1a?style=for-the-badge&logo=linkedin&logoColor=4FC3F7&labelColor=0d1b3e)](https://linkedin.com/in/mohammed-mahmoud)
+
+<br/>
+
+*Open to work — Cairo, Egypt.*
+
+</div>
+
+<br/>
+
+<div align="center">
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+</div>
+
+<br/>
+
+<div align="center">
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1b3e,50:0a0a1a,100:000000&height=120&section=footer&animation=fadeIn" width="100%"/>
+
+<sub>
+
+© 2026 **Mohammed Mahmoud** — All Rights Reserved. &nbsp;|&nbsp; [mohammed-mahmoud.com](https://mohammed-mahmoud.com)
+
+</sub>
+
+</div>
