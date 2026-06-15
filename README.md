@@ -14,7 +14,9 @@
 
 ## `◈` &nbsp; About
 
-> Full stack developer building scalable web and mobile applications — from backend APIs to polished frontends and cross-platform mobile apps. Based in Cairo, Egypt.
+I'm Mohammed — I spend most of my time alone, which is honestly when I work best. I build full stack web and mobile apps, and when I'm not coding I'm out playing sports. Programming isn't just what I do, it's what I keep coming back to.
+
+Based in Cairo, Egypt.
 
 <br/>
 
@@ -46,33 +48,6 @@
 
 <br/>
 
-## `◈` &nbsp; Selected Work
-
-<table>
-<tr>
-<td width="50%">
-
-**Miveron** — [miveron.com](https://miveron.com)
-Luxury watch e-commerce. Dark editorial identity, full cart and checkout.
-
-</td>
-<td width="50%">
-
-**RIVA** — [itsriva.com](https://itsriva.com)
-Premium accessories store for women. Sanity CMS, WhatsApp checkout.
-
-</td>
-</tr>
-</table>
-
-<br/>
-
-<div align="center">
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
-</div>
-
-<br/>
-
 ## `◈` &nbsp; Connect
 
 <div align="center">
@@ -84,6 +59,8 @@ Premium accessories store for women. Sanity CMS, WhatsApp checkout.
 [![GitHub](https://img.shields.io/badge/GitHub-0d1b3e?style=for-the-badge&logo=github&logoColor=4FC3F7&labelColor=0a0a1a)](https://github.com/Mohammed-Mahmoudd)
 &nbsp;
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0d1b3e?style=for-the-badge&logo=linkedin&logoColor=4FC3F7&labelColor=0a0a1a)](https://eg.linkedin.com/in/mohammed-mahmoud-348ab1231)
+&nbsp;
+[![Email](https://img.shields.io/badge/gamermada2@gmail.com-0d1b3e?style=for-the-badge&logo=gmail&logoColor=4FC3F7&labelColor=0a0a1a)](mailto:gamermada2@gmail.com)
 
 <br/>
 
