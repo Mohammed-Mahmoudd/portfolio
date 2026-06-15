@@ -58,7 +58,7 @@ Based in Cairo, Egypt.
 &nbsp;
 [![GitHub](https://img.shields.io/badge/GitHub-0d1b3e?style=for-the-badge&logo=github&logoColor=4FC3F7&labelColor=0a0a1a)](https://github.com/Mohammed-Mahmoudd)
 &nbsp;
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0d1b3e?style=for-the-badge&logo=linkedin&logoColor=4FC3F7&labelColor=0a0a1a)](https://eg.linkedin.com/in/mohammed-mahmoud-348ab1231)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0d1b3e?style=for-the-badge&logo=linkedin&logoColor=4FC3F7&labelColor=0a0a1a)](https://eg.linkedin.com/in/mohammed123m)
 &nbsp;
 [![Email](https://img.shields.io/badge/gamermada2@gmail.com-0d1b3e?style=for-the-badge&logo=gmail&logoColor=4FC3F7&labelColor=0a0a1a)](mailto:gamermada2@gmail.com)
 
