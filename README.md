@@ -36,7 +36,7 @@ Based in Cairo, Egypt.
 | **Mobile** | React Native · Expo |
 | **Styling** | Tailwind CSS · Framer Motion |
 | **CMS** | Sanity |
-| **Language** | TypeScript · JavaScript |
+| **Language** | · TypeScript · JavaScript · Python ·|
 
 </div>
 
