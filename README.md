@@ -1,11 +1,11 @@
 <div align="center">
 
 <!-- Animated Header Banner -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,40:0a0a1a,100:0d1b3e&height=200&section=header&text=MOHAMMED%20MAHMOUD&fontSize=50&fontColor=ffffff&fontAlignY=38&desc=Frontend%20Developer%20%2F%20Scalable%20Apps&descSize=16&descAlignY=62&animation=fadeIn&fontFamily=georgia" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,40:0a0a1a,100:0d1b3e&height=200&section=header&text=MOHAMMED%20MAHMOUD&fontSize=50&fontColor=ffffff&fontAlignY=38&desc=Full%20Stack%20Web%20%26%20Mobile%20App%20Developer&descSize=16&descAlignY=62&animation=fadeIn&fontFamily=georgia" width="100%"/>
 
 <!-- Typing Animation -->
 <a href="https://mohammed-mahmoud.com">
-  <img src="https://readme-typing-svg.demolab.com?font=Cormorant+Garamond&size=22&duration=3000&pause=1000&color=4FC3F7&center=true&vCenter=true&width=600&lines=Building+Scalable+Apps.;Open+to+Work.;Frontend+Developer+based+in+Cairo." alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Cormorant+Garamond&size=22&duration=3000&pause=1000&color=4FC3F7&center=true&vCenter=true&width=600&lines=Full+Stack+Web+%26+Mobile+Developer.;Building+Scalable+Apps.;Open+to+Work.+Cairo%2C+Egypt." alt="Typing SVG" />
 </a>
 
 <br/>
@@ -19,9 +19,9 @@
 
 ## `◈` &nbsp; About
 
-> **Mohammed Mahmoud** is a frontend developer based in Cairo, Egypt — building clean, performant, and scalable web applications with a sharp eye for design and detail.
+> **Mohammed Mahmoud** is a full stack web and mobile app developer based in Cairo, Egypt — building clean, performant, and scalable products across web and mobile with a sharp eye for design and detail.
 
-From e-commerce platforms to personal portfolios, the work spans full product builds with modern stacks, thoughtful UI, and experiences that hold up at scale.
+From e-commerce platforms to mobile applications, the work spans the full stack — backend APIs, frontend interfaces, and native mobile experiences — built with modern stacks and shipped to production.
 
 <br/>
 
@@ -37,7 +37,9 @@ From e-commerce platforms to personal portfolios, the work spans full product bu
 
 | Layer | Technology |
 |:---|:---|
-| **Framework** | Next.js · React |
+| **Web** | Next.js · React · Node.js |
+| **Mobile** | React Native · Expo |
+| **Backend** | REST APIs · Express |
 | **Styling** | Tailwind CSS · Framer Motion |
 | **CMS** | Sanity |
 | **Language** | TypeScript · JavaScript |
