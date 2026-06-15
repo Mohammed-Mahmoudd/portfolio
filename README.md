@@ -30,7 +30,7 @@ Based in Cairo, Egypt.
 
 <div align="center">
 
-| | Technology |
+| This | Technology |
 |:---|:---|
 | **Web** | Next.js · React · Node.js · Express |
 | **Mobile** | React Native · Expo |
